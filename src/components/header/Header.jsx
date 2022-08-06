@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FiSettings } from "react-icons/fi";
 import { FiBarChart2 } from "react-icons/fi";
@@ -27,7 +27,7 @@ const FlexContainer = styled.div`
 `;
 
 const Button = styled.header`
-  border-radius: 30%;
+  border-radius: 20%;
   height: 4rem;
   min-weight: 4rem;
   font-size: 2rem;
@@ -42,11 +42,16 @@ const Button = styled.header`
 function Header() {
   const dispatch = useDispatch();
 
+  const theme = useSelector((state) => state.theme);
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <HeaderEl>
-      <div>
-        <Button>EN</Button>
-      </div>
+      <Button>EN</Button>
+      <h2>Wordle</h2>
       <FlexContainer>
         <Button>
           <FiSettings onClick={() => dispatch(toggleSetting(true))} />
