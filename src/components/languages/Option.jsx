@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "../Button";
+import { ButtonDiv } from "../Button";
 import { useSelector, useDispatch } from "react-redux";
 import { setLanguage } from "../../store/language/language-actions";
 
-const Wrapper = styled(Button)`
+const Wrapper = styled(ButtonDiv)`
   border-radius: 1rem;
   width: 15rem;
   background-color: ${(props) =>
     props.lang === props.language
-      ? "var(--color-correct-letter)"
+      ? "var(--color-green)"
       : props.hover
       ? "var(--color-btn-hover)"
       : "var(--color-btn)"};

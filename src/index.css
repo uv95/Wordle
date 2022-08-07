@@ -10,7 +10,7 @@ html {
 }
 
 :root {
-  --color-correct-letter: rgb(106, 170, 100);
+  --color-green: rgb(106, 170, 100);
 }
 
 body[data-theme="dark"] {
