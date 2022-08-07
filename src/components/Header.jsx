@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FiSettings } from "react-icons/fi";
 import { FiBarChart2 } from "react-icons/fi";
@@ -8,7 +8,13 @@ import {
   toggleSetting,
   toggleStats,
   toggleInfo,
-} from "../../store/modals/modals-actions";
+} from "../store/modals/modals-actions";
+import { toggleLanguage } from "../store/language/language-actions";
+import Button from "./Button";
+import Languages from "./languages/Languages";
+import gb from "../img/gb.svg";
+import ru from "../img/ru.svg";
+import { languages } from "../config";
 
 const HeaderEl = styled.header`
   display: flex;
@@ -26,32 +32,30 @@ const FlexContainer = styled.div`
   gap: 2rem;
 `;
 
-const Button = styled.header`
-  border-radius: 20%;
-  height: 4rem;
-  min-weight: 4rem;
-  font-size: 2rem;
-  background-color: var(--color-btn);
-  padding: 0.8rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+const ImgContainer = styled.div`
+  width: 2rem;
 `;
 
 function Header() {
   const dispatch = useDispatch();
-
+  const { language, languagesOpen } = useSelector((state) => state.language);
   const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
 
+  const openLanguagesModal = () => dispatch(toggleLanguage(true));
+
   return (
     <HeaderEl>
-      <Button>EN</Button>
-      <h2>Wordle</h2>
+      <Button onClick={openLanguagesModal}>
+        <ImgContainer>
+          <img src={language === "English" ? gb : ru} alt="country flag" />
+        </ImgContainer>
+        {languages[language.toLowerCase()].short}
+      </Button>
+      {languagesOpen && <Languages />}
       <FlexContainer>
         <Button>
           <FiSettings onClick={() => dispatch(toggleSetting(true))} />

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { languages } from "../config";
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,24 +29,22 @@ const Key = styled.div`
 `;
 
 function Keyboard() {
-  const firstRow = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
-  const secondRow = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
-  const thirdRow = ["enter", "z", "x", "c", "v", "b", "n", "m"];
+  const { language } = useSelector((state) => state.language);
 
   return (
     <Wrapper>
       <Row>
-        {firstRow.map((key) => (
+        {languages[language.toLowerCase()].keyboard.first.map((key) => (
           <Key key={key}>{key.toUpperCase()}</Key>
         ))}
       </Row>
       <Row>
-        {secondRow.map((key) => (
+        {languages[language.toLowerCase()].keyboard.second.map((key) => (
           <Key key={key}>{key.toUpperCase()}</Key>
         ))}
       </Row>
       <Row>
-        {thirdRow.map((key) => (
+        {languages[language.toLowerCase()].keyboard.third.map((key) => (
           <Key key={key}>{key.toUpperCase()}</Key>
         ))}
         <Key>

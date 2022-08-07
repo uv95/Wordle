@@ -9,7 +9,7 @@ const Letter = styled.div`
   height: 6rem;
   width: 6rem;
   margin: 0.5rem;
-  border-radius: 20%;
+  border-radius: 1rem;
   border: 0.2rem solid var(--color-btn);
 `;
 
