@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const ModalContainer = styled.div`
   width: 50%;
-  min-height: 50%;
   max-height: 100%;
   overflow-y: auto;
   border-radius: 1rem;
@@ -10,6 +9,6 @@ const ModalContainer = styled.div`
   background-color: var(--color-bg);
   text-align: center;
   position: relative;
-  padding: 0 2rem;
+  padding: 0 2rem 1.5rem 2rem;
 `;
 export default ModalContainer;

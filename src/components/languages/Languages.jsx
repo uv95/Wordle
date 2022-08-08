@@ -13,7 +13,6 @@ import { toggleLanguage } from "../../store/language/language-actions";
 
 const LanguagesContainer = styled(ModalContainer)`
   min-height: 0;
-  margin-top: -30rem;
   padding: 0 2rem 2rem 2rem;
 `;
 

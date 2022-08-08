@@ -1,10 +1,11 @@
 import React from "react";
-import CloseIcon from "./modal/CloseIcon";
-import Wrapper from "./modal/Wrapper";
-import ModalContainer from "./modal/ModalContainer";
-import Title from "./modal/Title";
+import CloseIcon from "../CloseIcon";
+import Wrapper from "../Wrapper";
+import ModalContainer from "../ModalContainer";
+import Title from "../Title";
+import SettingContent from "./SettingContent";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSetting } from "../store/modals/modals-actions";
+import { toggleSetting } from "../../../store/modals/modals-actions";
 
 function Setting() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function Setting() {
         <ModalContainer onClick={(e) => e.stopPropagation()}>
           <Title>Setting</Title>
           <CloseIcon onClick={closeModal} />
+          <SettingContent />
         </ModalContainer>
       </Wrapper>
     );

@@ -30,9 +30,7 @@ function InfoContent() {
         colors={["green", "green", "green", "green", "green"]}
         word="flame"
       />
-      <Text marginBottom bold>
-        Got it!
-      </Text>
+      <Text bold>Got it!</Text>
     </>
   );
 }

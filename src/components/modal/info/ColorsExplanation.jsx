@@ -6,7 +6,10 @@ import Text from "./Text";
 const FlexContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: ${(props) => props.marginBottom && "1rem"};
+
+  &:not(:nth-of-type(3)) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const LetterBoxColoredSmall = styled(LetterBoxColored)`
@@ -27,14 +30,14 @@ const GrayBackground = styled.div`
 function ColorsExplanation() {
   return (
     <GrayBackground>
-      <FlexContainer marginBottom>
+      <FlexContainer>
         <LetterBoxColoredSmall color="gray">T</LetterBoxColoredSmall>
         <Text>,</Text>
         <LetterBoxColoredSmall color="gray">B</LetterBoxColoredSmall>
         <Text> aren't in the target word at all.</Text>
       </FlexContainer>
 
-      <FlexContainer marginBottom>
+      <FlexContainer>
         <LetterBoxColoredSmall color="yellow">A</LetterBoxColoredSmall>
         <Text>,</Text>
         <LetterBoxColoredSmall color="yellow">L</LetterBoxColoredSmall>

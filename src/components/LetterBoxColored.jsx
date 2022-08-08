@@ -9,7 +9,7 @@ const LetterBoxColored = styled(LetterBox)`
   align-items: center;
   font-size: 3rem;
   font-weight: 700;
-  color: var(--color-bg);
+  color: var(--color-white);
   background-color: ${(props) => {
     if (props.color === "gray") return "var(--color-gray)";
     if (props.color === "green") return "var(--color-green)";

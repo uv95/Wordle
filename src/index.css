@@ -2,6 +2,8 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -13,6 +15,7 @@ html {
   --color-green: rgb(121, 184, 81);
   --color-yellow: rgb(243, 194, 55);
   --color-gray: rgb(164, 174, 196);
+  --color-white: rgb(255, 255, 255);
 }
 
 body[data-theme="dark"] {

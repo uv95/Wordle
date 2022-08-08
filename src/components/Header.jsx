@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FiSettings } from "react-icons/fi";
 import { FiBarChart2 } from "react-icons/fi";
@@ -20,8 +20,7 @@ const HeaderEl = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  width: 50%;
+  padding: 1rem 25rem;
   margin: 0 auto;
   background-color: var(--color-bg);
   color: var(--color-text);

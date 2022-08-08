@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Setting from "./Setting";
+import Setting from "./modal/setting/Setting";
 import Board from "./board/Board";
 import Keyboard from "./Keyboard";
 import Info from "./modal/info/Info";
