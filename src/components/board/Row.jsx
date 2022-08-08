@@ -1,16 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import LetterBox from "./LetterBox";
 
 const Wrapper = styled.div`
   display: flex;
-`;
-
-const Letter = styled.div`
-  height: 6rem;
-  width: 6rem;
-  margin: 0.5rem;
-  border-radius: 1rem;
-  border: 0.2rem solid var(--color-btn);
 `;
 
 function Row() {
@@ -19,7 +12,7 @@ function Row() {
   return (
     <Wrapper>
       {fiveLetters.map((letter) => (
-        <Letter key={letter} />
+        <LetterBox key={letter} />
       ))}
     </Wrapper>
   );

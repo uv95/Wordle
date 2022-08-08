@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Setting from "./Setting";
 import Board from "./board/Board";
 import Keyboard from "./Keyboard";
-import Info from "./Info";
+import Info from "./modal/info/Info";
 import Stats from "./Stats";
 
 const Wrapper = styled.div`
