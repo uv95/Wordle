@@ -18,7 +18,7 @@ function Setting() {
     return (
       <Wrapper onClick={closeModal}>
         <ModalContainer onClick={(e) => e.stopPropagation()}>
-          <Title>Setting</Title>
+          <Title>Settings</Title>
           <CloseIcon onClick={closeModal} />
           <SettingContent />
         </ModalContainer>

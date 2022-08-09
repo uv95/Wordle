@@ -5,18 +5,17 @@ import Row from "./Row";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-
+  gap: 0.3rem;
   align-items: center;
   padding: 2rem 0;
   margin: auto;
 `;
 
 function Board() {
-  const fiveLettersBoard = [0, 1, 2, 3, 4];
+  const rows = [0, 1, 2, 3, 4, 5];
   return (
     <Wrapper>
-      {fiveLettersBoard.map((row) => (
+      {rows.map((row) => (
         <Row key={row} />
       ))}
     </Wrapper>

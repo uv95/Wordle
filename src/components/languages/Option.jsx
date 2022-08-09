@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ButtonDiv from "../ButtonDiv";
+import Button from "../Button";
 import { useSelector, useDispatch } from "react-redux";
 import { setLanguage } from "../../store/language/language-actions";
 
-const Wrapper = styled(ButtonDiv)`
+const Wrapper = styled(Button)`
   border-radius: 1rem;
   width: 15rem;
   background-color: ${(props) =>
-    props.lang === props.language
-      ? "var(--color-green)"
-      : props.hover
-      ? "var(--color-btn-hover)"
-      : "var(--color-btn)"};
+    props.lang === props.language ? "var(--color-green)" : "var(--color-btn)"};
+
+  &:hover {
+    background-color: ${(props) =>
+      props.lang === props.language
+        ? "var(--color-green)"
+        : "var(--color-btn-hover)"}
 `;
 
 const ImgContainer = styled.div`

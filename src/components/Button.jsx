@@ -1,18 +1,21 @@
-import React, { useState } from "react";
-import ButtonDiv from "./ButtonDiv";
+import styled from "styled-components";
 
-function Button({ children, onClick }) {
-  const [hover, setHover] = useState(false);
-  return (
-    <ButtonDiv
-      hover={hover}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onClick={onClick}
-    >
-      {children}
-    </ButtonDiv>
-  );
-}
+const Button = styled.div`
+  background-color: var(--color-btn);
+  border-radius: 1rem;
+  height: 4rem;
+  min-width: 4rem;
+  font-size: 2rem;
+  padding: 0.8rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-btn-hover);
+  }
+`;
 
 export default Button;

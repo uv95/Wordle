@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ModalContainer = styled.div`
-  width: 50%;
+  width: 60%;
   max-height: 100%;
   overflow-y: auto;
   border-radius: 1rem;

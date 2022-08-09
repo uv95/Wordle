@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { languages } from "../config";
-import ButtonDiv from "./ButtonDiv";
+import Button from "./Button";
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const Row = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const KeyBtn = styled(ButtonDiv)`
+const KeyBtn = styled(Button)`
   height: 5rem;
   min-width: 5rem;
   font-size: 2rem;
