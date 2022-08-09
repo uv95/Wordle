@@ -6,9 +6,15 @@ import Keyboard from "./Keyboard";
 import Info from "./modal/info/Info";
 import Stats from "./Stats";
 
-const Wrapper = styled.div`
-  width: 50%;
+const Wrapper = styled.main`
+  width: 100%;
+  min-height: calc(100vh - 6rem);
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 `;
 
 function Container() {

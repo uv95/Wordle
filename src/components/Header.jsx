@@ -16,14 +16,19 @@ import gb from "../img/gb.svg";
 import ru from "../img/ru.svg";
 import { languages } from "../config";
 
-const HeaderEl = styled.header`
+const HeaderWrapper = styled.header`
   display: flex;
-  justify-content: space-between;
+  height: 6rem;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 25rem;
-  margin: 0 auto;
   background-color: var(--color-bg);
   color: var(--color-text);
+`;
+
+const HeaderContainer = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const FlexContainer = styled.div`
@@ -47,26 +52,28 @@ function Header() {
   const openLanguagesModal = () => dispatch(toggleLanguage(true));
 
   return (
-    <HeaderEl>
-      <Button onClick={openLanguagesModal}>
-        <ImgContainer>
-          <img src={language === "English" ? gb : ru} alt="country flag" />
-        </ImgContainer>
-        {languages[language.toLowerCase()].short}
-      </Button>
-      {languagesOpen && <Languages />}
-      <FlexContainer>
-        <Button>
-          <FiSettings onClick={() => dispatch(toggleSetting(true))} />
+    <HeaderWrapper>
+      <HeaderContainer>
+        <Button onClick={openLanguagesModal}>
+          <ImgContainer>
+            <img src={language === "English" ? gb : ru} alt="country flag" />
+          </ImgContainer>
+          {languages[language.toLowerCase()].short}
         </Button>
-        <Button>
-          <FiBarChart2 onClick={() => dispatch(toggleStats(true))} />
-        </Button>
-        <Button>
-          <FiHelpCircle onClick={() => dispatch(toggleInfo(true))} />
-        </Button>
-      </FlexContainer>
-    </HeaderEl>
+        {languagesOpen && <Languages />}
+        <FlexContainer>
+          <Button>
+            <FiSettings onClick={() => dispatch(toggleSetting(true))} />
+          </Button>
+          <Button>
+            <FiBarChart2 onClick={() => dispatch(toggleStats(true))} />
+          </Button>
+          <Button>
+            <FiHelpCircle onClick={() => dispatch(toggleInfo(true))} />
+          </Button>
+        </FlexContainer>
+      </HeaderContainer>
+    </HeaderWrapper>
   );
 }
 

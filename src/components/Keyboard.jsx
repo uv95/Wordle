@@ -3,18 +3,25 @@ import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { languages } from "../config";
-import Button from "./Button";
+import ButtonDiv from "./ButtonDiv";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 2rem;
 `;
 
 const Row = styled.div`
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+`;
+
+const KeyBtn = styled(ButtonDiv)`
+  height: 5rem;
+  min-width: 5rem;
+  font-size: 2rem;
 `;
 
 function Keyboard() {
@@ -24,21 +31,21 @@ function Keyboard() {
     <Wrapper>
       <Row>
         {languages[language.toLowerCase()].keyboard.first.map((key) => (
-          <Button key={key}>{key.toUpperCase()}</Button>
+          <KeyBtn key={key}>{key.toUpperCase()}</KeyBtn>
         ))}
       </Row>
       <Row>
         {languages[language.toLowerCase()].keyboard.second.map((key) => (
-          <Button key={key}>{key.toUpperCase()}</Button>
+          <KeyBtn key={key}>{key.toUpperCase()}</KeyBtn>
         ))}
       </Row>
       <Row>
         {languages[language.toLowerCase()].keyboard.third.map((key) => (
-          <Button key={key}>{key.toUpperCase()}</Button>
+          <KeyBtn key={key}>{key.toUpperCase()}</KeyBtn>
         ))}
-        <Button>
+        <KeyBtn>
           <FiArrowLeft />
-        </Button>
+        </KeyBtn>
       </Row>
     </Wrapper>
   );

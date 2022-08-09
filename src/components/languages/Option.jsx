@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ButtonDiv } from "../Button";
+import ButtonDiv from "../ButtonDiv";
 import { useSelector, useDispatch } from "react-redux";
 import { setLanguage } from "../../store/language/language-actions";
 

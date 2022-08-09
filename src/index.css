@@ -11,6 +11,10 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  background: var(--color-bg);
+}
+
 :root {
   --color-green: rgb(121, 184, 81);
   --color-yellow: rgb(243, 194, 55);

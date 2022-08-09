@@ -6,8 +6,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
   align-items: center;
   padding: 2rem 0;
+  margin: auto;
 `;
 
 function Board() {
