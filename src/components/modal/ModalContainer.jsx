@@ -9,6 +9,6 @@ const ModalContainer = styled.div`
   background-color: var(--color-bg);
   text-align: center;
   position: relative;
-  padding: 0 2rem 1.5rem 2rem;
+  padding: 0 2rem 2rem 2rem;
 `;
 export default ModalContainer;

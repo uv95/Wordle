@@ -1,10 +1,11 @@
 import React from "react";
-import CloseIcon from "./modal/CloseIcon";
-import Wrapper from "./modal/Wrapper";
-import ModalContainer from "./modal/ModalContainer";
-import Title from "./modal/Title";
+import CloseIcon from "../CloseIcon";
+import Wrapper from "../Wrapper";
+import ModalContainer from "../ModalContainer";
+import Title from "../Title";
+import StatsContent from "./StatsContent";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleStats } from "../store/modals/modals-actions";
+import { toggleStats } from "../../../store/modals/modals-actions";
 
 function Stats() {
   const dispatch = useDispatch();
@@ -17,8 +18,9 @@ function Stats() {
     return (
       <Wrapper onClick={closeModal}>
         <ModalContainer onClick={(e) => e.stopPropagation()}>
-          <Title>Stats</Title>
+          <Title>Statistics</Title>
           <CloseIcon onClick={closeModal} />
+          <StatsContent />
         </ModalContainer>
       </Wrapper>
     );

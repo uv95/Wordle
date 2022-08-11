@@ -1,7 +1,7 @@
 import React from "react";
 import WordExample from "./WordExample";
 import ColorsExplanation from "./ColorsExplanation";
-import Text from "./Text";
+import Text from "../Text";
 
 function InfoContent() {
   return (

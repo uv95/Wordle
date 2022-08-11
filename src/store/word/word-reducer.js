@@ -5,7 +5,8 @@ import {
   CHECK_CURRENT_WORD,
   SET_CURRENT_WORD,
   CLEAR_CURRENT_WORD,
-  SET_COLORS,
+  SET_STATS,
+  RESET_GAME,
 } from "./word-actions";
 
 const initialState = {
@@ -13,9 +14,13 @@ const initialState = {
   guesses: [[], [], [], [], [], []],
   lettersColors: [],
   guessesNumber: 0,
+  guessesNumberList: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
   currentWord: [],
   word: "pride",
   guessed: false,
+  gamesWon: 0,
+  gamesLost: 0,
+  gamesPlayed: 0,
 };
 
 export const wordReducer = (state = initialState, { type, payload }) => {
@@ -70,6 +75,36 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         guessed: state.word === state.currentWord.join(""),
         guessesNumber: state.guessesNumber + 1,
       };
+    case SET_STATS:
+      return {
+        ...state,
+        guessesNumberList: state.guessed
+          ? {
+              ...state.guessesNumberList,
+              [state.guessesNumber]:
+                state.guessesNumberList[state.guessesNumber] + 1,
+            }
+          : state.guessesNumberList,
+        gamesPlayed:
+          state.guessed || state.guessesNumber === 5
+            ? state.gamesPlayed + 1
+            : state.gamesPlayed,
+        gamesWon: state.guessed ? state.gamesWon + 1 : state.gamesWon,
+        gamesLost:
+          !state.guessed && state.guessesNumber === 5
+            ? state.gamesLost + 1
+            : state.gamesLost,
+      };
+    case RESET_GAME:
+      return {
+        ...state,
+        guesses: [[], [], [], [], [], []],
+        lettersColors: [],
+        guessesNumber: 0,
+        currentWord: [],
+        guessed: false,
+      };
+
     default:
       return state;
   }

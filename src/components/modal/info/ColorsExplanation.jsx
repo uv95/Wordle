@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LetterBoxColored from "../../LetterBoxColored";
-import Text from "./Text";
+import Text from "../Text";
 
 const FlexContainer = styled.div`
   display: flex;

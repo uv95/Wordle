@@ -4,7 +4,8 @@ export const REMOVE_LETTER = "@@word/REMOVE_LETTER";
 export const SET_CURRENT_WORD = "@@word/SET_CURRENT_WORD";
 export const CLEAR_CURRENT_WORD = "@@word/CLEAR_CURRENT_WORD";
 export const CHECK_CURRENT_WORD = "@@word/CHECK_CURRENT_WORD";
-export const SET_COLORS = "@@word/SET_COLORS";
+export const SET_STATS = "@@word/SET_STATS";
+export const RESET_GAME = "@@word/RESET_GAME";
 
 export const setLettersNumber = (num) => ({
   type: SET_LETTERS_NUMBER,
@@ -27,11 +28,18 @@ export const checkCurrentWord = () => ({
 const clearCurrentWord = () => ({
   type: CLEAR_CURRENT_WORD,
 });
+const setStats = () => ({
+  type: SET_STATS,
+});
+export const resetGame = () => ({
+  type: RESET_GAME,
+});
 
 export const check = (wordLength, lettersNumber) => (dispatch) => {
   if (wordLength === lettersNumber) {
     dispatch(setCurrentWord());
     dispatch(checkCurrentWord());
+    dispatch(setStats());
     dispatch(clearCurrentWord());
   }
 };

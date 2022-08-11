@@ -28,8 +28,9 @@ const KeyBtn = styled(Button)`
 function Keyboard() {
   const dispatch = useDispatch();
   const { language } = useSelector((state) => state.language);
-  const { guesses, guessed, guessesNumber, lettersNumber, currentWord } =
-    useSelector((state) => state.word);
+  const { guesses, guessesNumber, lettersNumber } = useSelector(
+    (state) => state.word
+  );
 
   const checkWord = () => {
     dispatch(check(guesses[guessesNumber].length, lettersNumber));
@@ -52,12 +53,7 @@ function Keyboard() {
         ))}
       </Row>
       <Row>
-        <KeyBtn
-          onClick={() => {
-            checkWord();
-            console.log(guessed);
-          }}
-        >
+        <KeyBtn onClick={checkWord}>
           {languages[language.toLowerCase()].keyboard.enter.toUpperCase()}
         </KeyBtn>
         {languages[language.toLowerCase()].keyboard.third.map((key) => (
