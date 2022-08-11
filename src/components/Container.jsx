@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Setting from "./modal/setting/Setting";
 import Board from "./board/Board";
 import Keyboard from "./Keyboard";
 import Info from "./modal/info/Info";
 import Stats from "./Stats";
+import { useSelector } from "react-redux";
+import Success from "./modal/success/Success";
 
 const Wrapper = styled.main`
   width: 100%;
@@ -18,6 +20,7 @@ const Wrapper = styled.main`
 `;
 
 function Container() {
+  const { guessed } = useSelector((state) => state.word);
   return (
     <Wrapper>
       <Setting />
@@ -25,6 +28,7 @@ function Container() {
       <Info />
       <Board />
       <Keyboard />
+      {guessed && <Success />}
     </Wrapper>
   );
 }

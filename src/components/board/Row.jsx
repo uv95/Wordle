@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import LetterBox from "./LetterBox";
 import { useSelector } from "react-redux";
@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-function Row() {
+function Row({ guess, colors }) {
   const { lettersNumber } = useSelector((state) => state.word);
 
   const obj = {
@@ -21,8 +21,10 @@ function Row() {
 
   return (
     <Wrapper>
-      {obj[lettersNumber].map((letter) => (
-        <LetterBox key={letter} />
+      {obj[lettersNumber].map((letter, i) => (
+        <LetterBox color={colors && colors[i]} key={letter}>
+          {guess[i]?.toUpperCase()}
+        </LetterBox>
       ))}
     </Wrapper>
   );
