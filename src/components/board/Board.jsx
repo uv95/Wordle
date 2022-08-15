@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Row from "./Row";
 import { useSelector, useDispatch } from "react-redux";
 import { addUsedWord } from "../../store/word/word-actions";
+import Spinner from "../modal/Spinner";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
   align-items: center;
   padding: 2rem 0;
   margin: auto;
@@ -25,7 +25,7 @@ function Board({ word }) {
     }
   }, [word, dispatch]);
 
-  if (loading) return <h2>Loading...</h2>;
+  if (loading) return <Spinner />;
 
   return (
     <Wrapper>

@@ -25,7 +25,7 @@ body {
 
 body[data-theme="dark"] {
   --color-text: rgb(255, 255, 255);
-  --color-bg: rgb(31, 31, 31);
+  --color-bg: rgb(27, 27, 29);
   --color-btn: rgb(82, 82, 95);
   --color-btn-hover: rgb(68, 68, 80);
 }
