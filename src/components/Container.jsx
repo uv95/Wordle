@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Setting from "./modal/setting/Setting";
 import Board from "./board/Board";
@@ -21,13 +21,15 @@ const Wrapper = styled.main`
 
 function Container() {
   const { guessed, guessesNumber } = useSelector((state) => state.word);
+  const [word, setWord] = useState("");
+
   return (
     <Wrapper>
       <Setting />
       <Stats />
       <Info />
-      <Board />
-      <Keyboard />
+      <Board word={word} />
+      <Keyboard word={word} setWord={setWord} />
       {(guessed || guessesNumber === 6) && <Finish />}
     </Wrapper>
   );

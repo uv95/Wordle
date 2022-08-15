@@ -1,4 +1,5 @@
-//languages
+const words = require("an-array-of-english-words");
+
 export const languages = {
   english: {
     long: "English",
@@ -22,4 +23,13 @@ export const languages = {
       enter: "ввод",
     },
   },
+};
+
+export const englishWords = {
+  5: words.filter((w) => w.length === 5),
+  6: words.filter((w) => w.length === 6),
+  7: words.filter((w) => w.length === 7),
+  8: words.filter((w) => w.length === 8),
+  9: words.filter((w) => w.length === 9),
+  10: words.filter((w) => w.length === 10),
 };

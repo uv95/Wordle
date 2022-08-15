@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Row from "./Row";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addUsedWord } from "../../store/word/word-actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,8 +13,19 @@ const Wrapper = styled.div`
   margin: auto;
 `;
 
-function Board() {
+function Board({ word }) {
+  const dispatch = useDispatch();
   const { guesses, lettersColors } = useSelector((state) => state.word);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (word !== "") {
+      setLoading(false);
+      dispatch(addUsedWord(word));
+    }
+  }, [word, dispatch]);
+
+  if (loading) return <h2>Loading...</h2>;
 
   return (
     <Wrapper>

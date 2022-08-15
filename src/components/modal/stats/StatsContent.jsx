@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Text from "../Text";
 import ProgressBars from "./ProgressBars";
-import { useSelector, useDispatch } from "react-redux";
-import { resetGame } from "../../../store/word/word-actions";
+import { useSelector } from "react-redux";
 
 const GridContainer = styled.div`
   display: grid;
@@ -46,11 +45,13 @@ function StatsContent() {
 
         <StatsBox>
           <Number>
-            {Math.min(
-              ...Object.keys(guessesNumberList).filter(
-                (key) => guessesNumberList[key] !== 0
-              )
-            )}
+            {!Object.values(guessesNumberList).every((n) => n === 0)
+              ? Math.min(
+                  ...Object.keys(guessesNumberList).filter(
+                    (key) => guessesNumberList[key] !== 0
+                  )
+                )
+              : 0}
           </Number>
           <Text>best try</Text>
         </StatsBox>

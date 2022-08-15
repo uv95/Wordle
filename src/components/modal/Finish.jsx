@@ -27,12 +27,15 @@ const PlayAgainButton = styled.div`
 
 function Finish() {
   const dispatch = useDispatch();
-  const { guessed } = useSelector((state) => state.word);
+  const { guessed, usedWordsList } = useSelector((state) => state.word);
   return (
     <Wrapper>
       <ModalContainer>
         <Title>{guessed ? "You won! 🏆" : "You lost 😟"}</Title>
         <StatsContent />
+        <h2>
+          Solution: {usedWordsList[usedWordsList.length - 1].toUpperCase()}
+        </h2>
         <PlayAgainButton onClick={() => dispatch(resetGame())}>
           Play again
         </PlayAgainButton>

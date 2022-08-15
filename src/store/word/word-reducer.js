@@ -7,6 +7,7 @@ import {
   CLEAR_CURRENT_WORD,
   SET_STATS,
   RESET_GAME,
+  ADD_USED_WORD,
 } from "./word-actions";
 
 const initialState = {
@@ -16,11 +17,12 @@ const initialState = {
   guessesNumber: 0,
   guessesNumberList: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
   currentWord: [],
-  word: "pride",
   guessed: false,
   gamesWon: 0,
   gamesLost: 0,
   gamesPlayed: 0,
+  usedWordsList: [],
+  newGame: true,
 };
 
 export const wordReducer = (state = initialState, { type, payload }) => {
@@ -65,15 +67,16 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         lettersColors: [
           ...state.lettersColors,
           state.currentWord.map((letter, i) => {
-            return !state.word.includes(letter)
+            return !payload.includes(letter)
               ? "gray"
-              : i === state.word.indexOf(letter)
+              : i === payload.indexOf(letter)
               ? "green"
               : "yellow";
           }),
         ],
-        guessed: state.word === state.currentWord.join(""),
+        guessed: payload === state.currentWord.join(""),
         guessesNumber: state.guessesNumber + 1,
+        newGame: false,
       };
     case SET_STATS:
       return {
@@ -103,6 +106,12 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         guessesNumber: 0,
         currentWord: [],
         guessed: false,
+        newGame: true,
+      };
+    case ADD_USED_WORD:
+      return {
+        ...state,
+        usedWordsList: [...state.usedWordsList, payload],
       };
 
     default:
