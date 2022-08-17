@@ -33,6 +33,6 @@ body[data-theme="dark"] {
 body[data-theme="light"] {
   --color-text: rgb(31, 31, 31);
   --color-bg: rgb(255, 255, 255);
-  --color-btn: rgb(206, 206, 226);
+  --color-btn: rgb(223, 223, 244);
   --color-btn-hover: rgb(189, 189, 207);
 }

@@ -1,3 +1,4 @@
+import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import {
   SET_LETTERS_NUMBER,
   ADD_LETTER,
@@ -8,6 +9,8 @@ import {
   SET_STATS,
   RESET_GAME,
   ADD_USED_WORD,
+  SET_KEYS_COLOR,
+  FILTER_KEYS_COLOR,
 } from "./word-actions";
 
 const initialState = {
@@ -24,6 +27,7 @@ const initialState = {
   usedWordsList: [],
   newGame: true,
   extraLettersHelper: [],
+  keyboard: { green: [], gray: [], yellow: [] },
 };
 
 export const wordReducer = (state = initialState, { type, payload }) => {
@@ -137,6 +141,58 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         guessesNumber: state.guessesNumber + 1,
         newGame: false,
       };
+    case SET_KEYS_COLOR:
+      return {
+        ...state,
+        keyboard: {
+          green: [
+            ...state.keyboard.green,
+            ...state.currentWord
+              .map((l, i) =>
+                state.lettersColors[state.lettersColors.length - 1][i] ===
+                "green"
+                  ? l
+                  : ""
+              )
+              .filter((l) => l !== ""),
+          ],
+          gray: [
+            ...state.keyboard.gray,
+            ...state.currentWord
+              .map((l, i) =>
+                state.lettersColors[state.lettersColors.length - 1][i] ===
+                "gray"
+                  ? l
+                  : ""
+              )
+              .filter((l) => l !== ""),
+          ],
+          yellow: [
+            ...state.keyboard.yellow,
+            ...state.currentWord
+              .map((l, i) =>
+                state.lettersColors[state.lettersColors.length - 1][i] ===
+                "yellow"
+                  ? l
+                  : ""
+              )
+              .filter((l) => l !== ""),
+          ],
+        },
+      };
+    case FILTER_KEYS_COLOR:
+      return {
+        ...state,
+        keyboard: {
+          green: state.keyboard.green,
+          yellow: state.keyboard.yellow.filter(
+            (l) => !state.keyboard.green.includes(l)
+          ),
+          gray: state.keyboard.gray.filter(
+            (l) => !state.keyboard.green.includes(l)
+          ),
+        },
+      };
     case SET_STATS:
       return {
         ...state,
@@ -167,6 +223,7 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         guessed: false,
         newGame: true,
         extraLettersHelper: [],
+        keyboard: { gray: [], green: [], yellow: [] },
       };
     case ADD_USED_WORD:
       return {

@@ -15,9 +15,7 @@ const Wrapper = styled.div`
 
 function Board({ word }) {
   const dispatch = useDispatch();
-  const { guesses, lettersColors, extraLettersHelper } = useSelector(
-    (state) => state.word
-  );
+  const { guesses, lettersColors } = useSelector((state) => state.word);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +23,6 @@ function Board({ word }) {
       setLoading(false);
       dispatch(addUsedWord(word));
       console.log(word, "word");
-      console.log(extraLettersHelper);
     }
   }, [word, dispatch]);
 

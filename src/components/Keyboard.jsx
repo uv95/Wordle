@@ -23,14 +23,19 @@ const KeyBtn = styled(Button)`
   height: 5rem;
   min-width: 4rem;
   font-size: 2rem;
+  background-color: ${(props) => {
+    if (props.color === "gray") return "var(--color-gray)";
+    if (props.color === "green") return "var(--color-green)";
+    if (props.color === "yellow") return "var(--color-yellow)";
+    return "var(--color-btn)";
+  }};
 `;
 
 function Keyboard({ word, setWord }) {
   const dispatch = useDispatch();
   const { language } = useSelector((state) => state.language);
-  const { guesses, guessesNumber, lettersNumber, newGame } = useSelector(
-    (state) => state.word
-  );
+  const { guesses, guessesNumber, lettersNumber, newGame, keyboard } =
+    useSelector((state) => state.word);
 
   useEffect(() => {
     const setNewWord = () => {
@@ -46,18 +51,32 @@ function Keyboard({ word, setWord }) {
     dispatch(check(guesses[guessesNumber].length, lettersNumber, word));
   };
 
+  const setKeyColor = (key) => {
+    if (keyboard.green.includes(key)) return "green";
+    if (keyboard.gray.includes(key)) return "gray";
+    if (keyboard.yellow.includes(key)) return "yellow";
+  };
+
   return (
     <Wrapper>
       <Row>
         {languages[language.toLowerCase()].keyboard.first.map((key) => (
-          <KeyBtn onClick={() => dispatch(addLetter(key))} key={key}>
+          <KeyBtn
+            color={setKeyColor(key)}
+            onClick={() => dispatch(addLetter(key))}
+            key={key}
+          >
             {key.toUpperCase()}
           </KeyBtn>
         ))}
       </Row>
       <Row>
         {languages[language.toLowerCase()].keyboard.second.map((key) => (
-          <KeyBtn onClick={() => dispatch(addLetter(key))} key={key}>
+          <KeyBtn
+            color={setKeyColor(key)}
+            onClick={() => dispatch(addLetter(key))}
+            key={key}
+          >
             {key.toUpperCase()}
           </KeyBtn>
         ))}
@@ -67,7 +86,11 @@ function Keyboard({ word, setWord }) {
           {languages[language.toLowerCase()].keyboard.enter.toUpperCase()}
         </KeyBtn>
         {languages[language.toLowerCase()].keyboard.third.map((key) => (
-          <KeyBtn onClick={() => dispatch(addLetter(key))} key={key}>
+          <KeyBtn
+            color={setKeyColor(key)}
+            onClick={() => dispatch(addLetter(key))}
+            key={key}
+          >
             {key.toUpperCase()}
           </KeyBtn>
         ))}
