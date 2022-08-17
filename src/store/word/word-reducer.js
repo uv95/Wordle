@@ -23,6 +23,7 @@ const initialState = {
   gamesPlayed: 0,
   usedWordsList: [],
   newGame: true,
+  extraLettersHelper: [],
 };
 
 export const wordReducer = (state = initialState, { type, payload }) => {
@@ -54,6 +55,7 @@ export const wordReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         currentWord: state.guesses[state.guessesNumber],
+        extraLettersHelper: [],
       };
     case CLEAR_CURRENT_WORD:
       return {
@@ -67,11 +69,68 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         lettersColors: [
           ...state.lettersColors,
           state.currentWord.map((letter, i) => {
-            return !payload.includes(letter)
-              ? "gray"
-              : i === payload.indexOf(letter)
-              ? "green"
-              : "yellow";
+            const allOccuranciesInCurrentWord = state.currentWord
+              .map((l, i) => (l === letter ? i : ""))
+              .filter((el) => el !== "");
+            const allOccuranciesInPayload = payload
+              .split("")
+              .map((l, i) => (l === letter ? i : ""))
+              .filter((el) => el !== "");
+
+            if (allOccuranciesInPayload.length === 0) return "gray";
+
+            if (
+              allOccuranciesInPayload.length > 0 &&
+              allOccuranciesInPayload.length >=
+                allOccuranciesInCurrentWord.length
+            )
+              return allOccuranciesInPayload.includes(i) ? "green" : "yellow";
+
+            if (
+              allOccuranciesInPayload.length > 0 &&
+              allOccuranciesInPayload.length <
+                allOccuranciesInCurrentWord.length
+            ) {
+              const correctLetters = allOccuranciesInCurrentWord.filter(
+                (l) => allOccuranciesInPayload.includes(l) // letters that user put in the right place
+                /* 
+                For example:
+                the SOLUTION is CAREFUL;
+                user's current word is FEDERAL;
+                letter is E;
+                allOccuranciesInCurrentWord would be [1,3];
+                allOccuranciesInPayload would be [3];
+                correctLetters would be [3]
+                */
+              );
+              const availableLetters = allOccuranciesInCurrentWord
+                .filter((l) => !correctLetters.includes(l))
+                .slice(
+                  0,
+                  allOccuranciesInPayload.length - correctLetters.length
+                )
+                .concat(...correctLetters);
+              /*
+               For example: 
+               allOccuranciesInPayload are [1,3,5];
+               allOccuranciesInCurrentWord are [1,5,6,8, 10];
+               correctLetters are [1,5];
+               availableLetters would be [1,5,6] (correct + first put letter within the available length)
+               */
+
+              state.extraLettersHelper.push(
+                ...allOccuranciesInCurrentWord.filter(
+                  (l) => !availableLetters.includes(l)
+                )
+              );
+
+              return state.extraLettersHelper.includes(i)
+                ? "gray"
+                : availableLetters.includes(i) &&
+                  allOccuranciesInPayload.includes(i)
+                ? "green"
+                : "yellow";
+            }
           }),
         ],
         guessed: payload === state.currentWord.join(""),
@@ -107,6 +166,7 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         currentWord: [],
         guessed: false,
         newGame: true,
+        extraLettersHelper: [],
       };
     case ADD_USED_WORD:
       return {
