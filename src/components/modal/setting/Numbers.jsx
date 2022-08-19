@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../../Button";
 import { useDispatch, useSelector } from "react-redux";
-import { setLettersNumber } from "../../../store/word/word-actions";
+import { setWordLength } from "../../../store/word/word-actions";
 
 const FlexContainer = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ function Numbers() {
         <Number
           key={num}
           currentNum={num === lettersNumber}
-          onClick={() => dispatch(setLettersNumber(num))}
+          onClick={() => dispatch(setWordLength(num))}
         >
           {num}
         </Number>

@@ -9,8 +9,9 @@ export const RESET_GAME = "@@word/RESET_GAME";
 export const ADD_USED_WORD = "@@word/ADD_USED_WORD";
 export const SET_KEYS_COLOR = "@@word/SET_KEYS_COLOR";
 export const FILTER_KEYS_COLOR = "@@word/FILTER_KEYS_COLOR";
+export const CHECK_EXISTENCE = "@@word/CHECK_EXISTENCE";
 
-export const setLettersNumber = (num) => ({
+const setLettersNumber = (num) => ({
   type: SET_LETTERS_NUMBER,
   payload: num,
 });
@@ -21,15 +22,19 @@ export const addLetter = (letter) => ({
 export const removeLetter = () => ({
   type: REMOVE_LETTER,
 });
-export const setCurrentWord = () => ({
+const setCurrentWord = () => ({
   type: SET_CURRENT_WORD,
 });
 
-export const checkCurrentWord = (word) => ({
+const checkCurrentWord = (word) => ({
   type: CHECK_CURRENT_WORD,
   payload: word,
 });
-const clearCurrentWord = () => ({
+const checkExistence = (words) => ({
+  type: CHECK_EXISTENCE,
+  payload: words,
+});
+export const clearCurrentWord = () => ({
   type: CLEAR_CURRENT_WORD,
 });
 const setStats = () => ({
@@ -49,13 +54,23 @@ export const addUsedWord = (word) => ({
   payload: word,
 });
 
-export const check = (wordLength, lettersNumber, word) => (dispatch) => {
-  if (wordLength === lettersNumber) {
-    dispatch(setCurrentWord());
-    dispatch(checkCurrentWord(word));
-    dispatch(setKeysColor());
-    dispatch(filterKeysColor());
-    dispatch(setStats());
-    dispatch(clearCurrentWord());
-  }
+export const setWordLength = (num) => (dispatch) => {
+  dispatch(setLettersNumber(num));
+  dispatch(resetGame());
+};
+
+export const checkWordExistence =
+  (words, wordLength, lettersNumber) => (dispatch) => {
+    if (wordLength === lettersNumber) {
+      dispatch(setCurrentWord());
+      dispatch(checkExistence(words));
+    }
+  };
+
+export const checkWord = (word) => (dispatch) => {
+  dispatch(checkCurrentWord(word));
+  dispatch(setKeysColor());
+  dispatch(filterKeysColor());
+  dispatch(setStats());
+  dispatch(clearCurrentWord());
 };

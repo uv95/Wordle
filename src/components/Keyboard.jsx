@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { languages, englishWords } from "../config";
 import Button from "./Button";
-import { addLetter, removeLetter, check } from "../store/word/word-actions";
+import {
+  addLetter,
+  removeLetter,
+  checkWord,
+  checkWordExistence,
+  clearCurrentWord,
+} from "../store/word/word-actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,8 +40,15 @@ const KeyBtn = styled(Button)`
 function Keyboard({ word, setWord }) {
   const dispatch = useDispatch();
   const { language } = useSelector((state) => state.language);
-  const { guesses, guessesNumber, lettersNumber, newGame, keyboard } =
-    useSelector((state) => state.word);
+  const {
+    guesses,
+    guessesNumber,
+    lettersNumber,
+    newGame,
+    keyboard,
+    wordExists,
+    currentWord,
+  } = useSelector((state) => state.word);
 
   useEffect(() => {
     const setNewWord = () => {
@@ -47,8 +60,14 @@ function Keyboard({ word, setWord }) {
     newGame && setNewWord();
   }, [lettersNumber, newGame, dispatch]);
 
-  const checkWord = () => {
-    dispatch(check(guesses[guessesNumber].length, lettersNumber, word));
+  const checkExistence = () => {
+    dispatch(
+      checkWordExistence(
+        englishWords[lettersNumber],
+        guesses[guessesNumber].length,
+        lettersNumber
+      )
+    );
   };
 
   const setKeyColor = (key) => {
@@ -56,6 +75,14 @@ function Keyboard({ word, setWord }) {
     if (keyboard.gray.includes(key)) return "gray";
     if (keyboard.yellow.includes(key)) return "yellow";
   };
+
+  useEffect(() => {
+    wordExists && currentWord.length && dispatch(checkWord(word));
+  }, [wordExists, word, dispatch, currentWord]);
+
+  useEffect(() => {
+    !wordExists && dispatch(clearCurrentWord());
+  }, [wordExists, dispatch]);
 
   return (
     <Wrapper>
@@ -82,7 +109,7 @@ function Keyboard({ word, setWord }) {
         ))}
       </Row>
       <Row>
-        <KeyBtn onClick={checkWord}>
+        <KeyBtn onClick={checkExistence}>
           {languages[language.toLowerCase()].keyboard.enter.toUpperCase()}
         </KeyBtn>
         {languages[language.toLowerCase()].keyboard.third.map((key) => (

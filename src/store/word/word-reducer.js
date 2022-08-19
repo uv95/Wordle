@@ -11,6 +11,7 @@ import {
   ADD_USED_WORD,
   SET_KEYS_COLOR,
   FILTER_KEYS_COLOR,
+  CHECK_EXISTENCE,
 } from "./word-actions";
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   guessesNumberList: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
   currentWord: [],
   guessed: false,
+  wordExists: true,
   gamesWon: 0,
   gamesLost: 0,
   gamesPlayed: 0,
@@ -61,12 +63,17 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         currentWord: state.guesses[state.guessesNumber],
         extraLettersHelper: [],
       };
+    case CHECK_EXISTENCE:
+      return {
+        ...state,
+        wordExists: payload.includes(state.currentWord.join("")),
+      };
     case CLEAR_CURRENT_WORD:
       return {
         ...state,
         currentWord: [],
+        wordExists: true,
       };
-
     case CHECK_CURRENT_WORD:
       return {
         ...state,
@@ -221,6 +228,7 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         guessesNumber: 0,
         currentWord: [],
         guessed: false,
+        wordExists: true,
         newGame: true,
         extraLettersHelper: [],
         keyboard: { gray: [], green: [], yellow: [] },
