@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import LetterBox from "./LetterBox";
 import { useSelector } from "react-redux";

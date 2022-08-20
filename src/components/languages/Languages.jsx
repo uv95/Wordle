@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import gb from "../../img/gb.svg";
 import ru from "../../img/ru.svg";
@@ -8,7 +8,7 @@ import Title from "../modal/Title";
 import CloseIcon from "../modal/CloseIcon";
 import ModalContainer from "../modal/ModalContainer";
 import { languages } from "../../config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleLanguage } from "../../store/language/language-actions";
 
 const LanguagesContainer = styled(ModalContainer)`
@@ -25,13 +25,22 @@ const GridContainer = styled.div`
 `;
 
 function Languages() {
+  const [title, setTitle] = useState("");
+
   const dispatch = useDispatch();
+  const { language } = useSelector((state) => state.language);
+
   const closeModal = () => dispatch(toggleLanguage(false));
+
+  useEffect(() => {
+    language === "English" && setTitle("Choose language");
+    language === "Russian" && setTitle("Выберите язык");
+  }, [language]);
 
   return (
     <Wrapper onClick={closeModal}>
       <LanguagesContainer onClick={(e) => e.stopPropagation()}>
-        <Title>Choose language</Title>
+        <Title>{title}</Title>
         <CloseIcon onClick={closeModal} />
         <GridContainer>
           <Option flag={gb} lang={languages.english} />

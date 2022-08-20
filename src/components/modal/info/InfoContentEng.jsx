@@ -1,9 +1,9 @@
 import React from "react";
 import WordExample from "./WordExample";
-import ColorsExplanation from "./ColorsExplanation";
+import ColorsExplanationEng from "./ColorsExplanationEng";
 import Text from "../Text";
 
-function InfoContent() {
+function InfoContentEng() {
   return (
     <>
       <Text marginBottom>
@@ -17,7 +17,7 @@ function InfoContent() {
         colors={["gray", "yellow", "gray", "yellow", "green"]}
         word="table"
       />
-      <ColorsExplanation />
+      <ColorsExplanationEng />
       <Text marginBottom>
         Another try to find matching letters in the target word.
       </Text>
@@ -35,4 +35,4 @@ function InfoContent() {
   );
 }
 
-export default InfoContent;
+export default InfoContentEng;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Toggle from "./Toggle";
 import Numbers from "./Numbers";
@@ -28,11 +28,6 @@ const Section = styled.div`
   }
 `;
 
-const FlexContainer = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-
 const SectionTitle = styled.h3`
   font-size: 2.5rem;
   font-weight: 500;
@@ -41,18 +36,27 @@ const SectionTitle = styled.h3`
 function SettingContent() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme);
+  const [text, setText] = useState({ 1: "", 2: "" });
+  const { language } = useSelector((state) => state.language);
 
   const toggleTheme = () =>
     dispatch(setTheme(theme === "light" ? "dark" : "light"));
 
+  useEffect(() => {
+    language === "English" &&
+      setText({ 1: "Number of letters", 2: "Dark theme" });
+    language === "Russian" &&
+      setText({ 1: "Количество букв", 2: "Темная тема" });
+  }, [language]);
+
   return (
     <>
       <Section>
-        <SectionTitle>Number of letters</SectionTitle>
+        <SectionTitle>{text[1]}</SectionTitle>
         <Numbers />
       </Section>
       <Section>
-        <SectionTitle>Dark theme</SectionTitle>
+        <SectionTitle>{text[2]}</SectionTitle>
         <Toggle theme={theme} onClick={toggleTheme} />
       </Section>
     </>

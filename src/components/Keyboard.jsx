@@ -1,8 +1,8 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
-import { languages, englishWords } from "../config";
+import { languages, englishWords, russianWords } from "../config";
 import Button from "./Button";
 import {
   addLetter,
@@ -10,6 +10,7 @@ import {
   checkWord,
   checkWordExistence,
   clearCurrentWord,
+  setWords,
 } from "../store/word/word-actions";
 
 const Wrapper = styled.div`
@@ -48,22 +49,39 @@ function Keyboard({ word, setWord }) {
     keyboard,
     wordExists,
     currentWord,
+    words,
   } = useSelector((state) => state.word);
 
   useEffect(() => {
+    language === "English" && dispatch(setWords(englishWords));
+    language === "Russian" && dispatch(setWords(russianWords));
+  }, [language, dispatch]);
+
+  useEffect(() => {
     const setNewWord = () => {
-      const randomNumber = Math.floor(
-        Math.random() * englishWords[lettersNumber].length
-      );
-      setWord(englishWords[lettersNumber][randomNumber]);
+      if (words[lettersNumber]) {
+        const randomNumber = Math.floor(
+          Math.random() * words[lettersNumber].length
+        );
+        setWord(words[lettersNumber][randomNumber]);
+      }
     };
     newGame && setNewWord();
-  }, [lettersNumber, newGame, dispatch]);
+    console.log(words);
+  }, [lettersNumber, newGame, dispatch, words]);
+
+  useEffect(() => {
+    wordExists && currentWord.length && dispatch(checkWord(word));
+  }, [wordExists, word, dispatch, currentWord]);
+
+  useEffect(() => {
+    !wordExists && dispatch(clearCurrentWord());
+  }, [wordExists, dispatch]);
 
   const checkExistence = () => {
     dispatch(
       checkWordExistence(
-        englishWords[lettersNumber],
+        words[lettersNumber],
         guesses[guessesNumber].length,
         lettersNumber
       )
@@ -75,14 +93,6 @@ function Keyboard({ word, setWord }) {
     if (keyboard.gray.includes(key)) return "gray";
     if (keyboard.yellow.includes(key)) return "yellow";
   };
-
-  useEffect(() => {
-    wordExists && currentWord.length && dispatch(checkWord(word));
-  }, [wordExists, word, dispatch, currentWord]);
-
-  useEffect(() => {
-    !wordExists && dispatch(clearCurrentWord());
-  }, [wordExists, dispatch]);
 
   return (
     <Wrapper>

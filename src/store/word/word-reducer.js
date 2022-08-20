@@ -1,4 +1,3 @@
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import {
   SET_LETTERS_NUMBER,
   ADD_LETTER,
@@ -12,6 +11,7 @@ import {
   SET_KEYS_COLOR,
   FILTER_KEYS_COLOR,
   CHECK_EXISTENCE,
+  SET_WORDS,
 } from "./word-actions";
 
 const initialState = {
@@ -29,6 +29,7 @@ const initialState = {
   usedWordsList: [],
   newGame: true,
   extraLettersHelper: [],
+  words: {},
   keyboard: { green: [], gray: [], yellow: [] },
 };
 
@@ -238,7 +239,11 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         ...state,
         usedWordsList: [...state.usedWordsList, payload],
       };
-
+    case SET_WORDS:
+      return {
+        ...state,
+        words: payload,
+      };
     default:
       return state;
   }

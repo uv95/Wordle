@@ -25,7 +25,7 @@ const Number = styled.h3`
   font-weight: 700;
 `;
 
-function StatsContent() {
+function StatsContentEng() {
   const { guessesNumberList, gamesWon, gamesPlayed } = useSelector(
     (state) => state.word
   );
@@ -67,4 +67,4 @@ function StatsContent() {
   );
 }
 
-export default StatsContent;
+export default StatsContentEng;

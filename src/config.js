@@ -1,4 +1,5 @@
-const words = require("an-array-of-english-words");
+const engWords = require("an-array-of-english-words");
+const rusWords = require("russian-words");
 
 export const languages = {
   english: {
@@ -26,10 +27,18 @@ export const languages = {
 };
 
 export const englishWords = {
-  5: words.filter((w) => w.length === 5),
-  6: words.filter((w) => w.length === 6),
-  7: words.filter((w) => w.length === 7),
-  8: words.filter((w) => w.length === 8),
-  9: words.filter((w) => w.length === 9),
-  10: words.filter((w) => w.length === 10),
+  5: engWords.filter((w) => w.length === 5),
+  6: engWords.filter((w) => w.length === 6),
+  7: engWords.filter((w) => w.length === 7),
+  8: engWords.filter((w) => w.length === 8),
+  9: engWords.filter((w) => w.length === 9),
+  10: engWords.filter((w) => w.length === 10),
+};
+export const russianWords = {
+  5: rusWords.filter((w) => w.length === 5),
+  6: rusWords.filter((w) => w.length === 6),
+  7: rusWords.filter((w) => w.length === 7),
+  8: rusWords.filter((w) => w.length === 8),
+  9: rusWords.filter((w) => w.length === 9),
+  10: rusWords.filter((w) => w.length === 10),
 };

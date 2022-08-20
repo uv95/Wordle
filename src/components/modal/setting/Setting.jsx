@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CloseIcon from "../CloseIcon";
 import Wrapper from "../Wrapper";
 import ModalContainer from "../ModalContainer";
@@ -9,16 +9,23 @@ import { toggleSetting } from "../../../store/modals/modals-actions";
 
 function Setting() {
   const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
 
   const { openSetting } = useSelector((state) => state.modals);
+  const { language } = useSelector((state) => state.language);
 
   const closeModal = () => dispatch(toggleSetting(false));
+
+  useEffect(() => {
+    language === "English" && setTitle("Settings");
+    language === "Russian" && setTitle("Настройки");
+  }, [language]);
 
   if (openSetting) {
     return (
       <Wrapper onClick={closeModal}>
         <ModalContainer onClick={(e) => e.stopPropagation()}>
-          <Title>Settings</Title>
+          <Title>{title}</Title>
           <CloseIcon onClick={closeModal} />
           <SettingContent />
         </ModalContainer>

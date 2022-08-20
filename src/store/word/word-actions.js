@@ -10,6 +10,7 @@ export const ADD_USED_WORD = "@@word/ADD_USED_WORD";
 export const SET_KEYS_COLOR = "@@word/SET_KEYS_COLOR";
 export const FILTER_KEYS_COLOR = "@@word/FILTER_KEYS_COLOR";
 export const CHECK_EXISTENCE = "@@word/CHECK_EXISTENCE";
+export const SET_WORDS = "@@word/SET_WORDS";
 
 const setLettersNumber = (num) => ({
   type: SET_LETTERS_NUMBER,
@@ -52,6 +53,10 @@ export const resetGame = () => ({
 export const addUsedWord = (word) => ({
   type: ADD_USED_WORD,
   payload: word,
+});
+export const setWords = (words) => ({
+  type: SET_WORDS,
+  payload: words,
 });
 
 export const setWordLength = (num) => (dispatch) => {

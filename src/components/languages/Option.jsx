@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../Button";
 import { useSelector, useDispatch } from "react-redux";
 import { setLanguage } from "../../store/language/language-actions";
+import { resetGame } from "../../store/word/word-actions";
 
 const Wrapper = styled(Button)`
   border-radius: 1rem;
@@ -26,6 +27,11 @@ function Option({ lang, flag }) {
   const [hover, setHover] = useState(false);
   const { language } = useSelector((state) => state.language);
 
+  const changeLang = () => {
+    dispatch(setLanguage(lang.eng));
+    dispatch(resetGame());
+  };
+
   return (
     <Wrapper
       hover={hover}
@@ -33,7 +39,7 @@ function Option({ lang, flag }) {
       language={language}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={() => dispatch(setLanguage(lang.eng))}
+      onClick={changeLang}
     >
       <ImgContainer>
         <img src={flag} alt="country flag" />

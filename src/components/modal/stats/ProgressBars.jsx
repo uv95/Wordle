@@ -33,17 +33,24 @@ const Bar = styled.div`
 `;
 
 function ProgressBars() {
+  const [title, setTitle] = useState("");
   const [maxRepeatedValue, setMaxRepeatedValue] = useState(0);
   const { guessesNumberList } = useSelector((state) => state.word);
   const guessesDistribution = [1, 2, 3, 4, 5, 6];
+  const { language } = useSelector((state) => state.language);
 
   useEffect(() => {
     setMaxRepeatedValue(Math.max(...Object.values(guessesNumberList)));
   }, [guessesNumberList]);
 
+  useEffect(() => {
+    language === "English" && setTitle("Guess distribution");
+    language === "Russian" && setTitle("Попытки");
+  }, [language]);
+
   return (
     <>
-      <Title>Guess distribution</Title>
+      <Title>{title}</Title>
       {guessesDistribution.map((guess) => (
         <Line key={guess}>
           <Text>{guess}</Text>{" "}

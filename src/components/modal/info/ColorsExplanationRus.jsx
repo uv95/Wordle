@@ -31,22 +31,22 @@ function ColorsExplanation() {
   return (
     <GrayBackground>
       <FlexContainer>
-        <LetterBoxColoredSmall color="gray">T</LetterBoxColoredSmall>
+        <LetterBoxColoredSmall color="gray">П</LetterBoxColoredSmall>
         <Text>,</Text>
-        <LetterBoxColoredSmall color="gray">B</LetterBoxColoredSmall>
-        <Text> aren't in the target word at all.</Text>
+        <LetterBoxColoredSmall color="gray">С</LetterBoxColoredSmall>
+        <Text> не содержатся в загаданном слове.</Text>
       </FlexContainer>
 
       <FlexContainer>
-        <LetterBoxColoredSmall color="yellow">A</LetterBoxColoredSmall>
+        <LetterBoxColoredSmall color="yellow">А</LetterBoxColoredSmall>
         <Text>,</Text>
-        <LetterBoxColoredSmall color="yellow">L</LetterBoxColoredSmall>
-        <Text> is in the word but in the wrong spot.</Text>
+        <LetterBoxColoredSmall color="yellow">Т</LetterBoxColoredSmall>
+        <Text> содержатся в слове, но не на своем месте.</Text>
       </FlexContainer>
 
       <FlexContainer>
-        <LetterBoxColoredSmall color="green">E</LetterBoxColoredSmall>
-        <Text> is in the word and in the correct spot.</Text>
+        <LetterBoxColoredSmall color="green">А</LetterBoxColoredSmall>
+        <Text> есть в слове и на своем месте.</Text>
       </FlexContainer>
     </GrayBackground>
   );

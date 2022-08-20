@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Wrapper from "./Wrapper";
 import ModalContainer from "./ModalContainer";
 import Title from "./Title";
-import StatsContent from "./stats/StatsContent";
+import StatsContentEng from "./stats/StatsContentEng";
+import StatsContentRus from "./stats/StatsContentRus";
 import { useSelector, useDispatch } from "react-redux";
 import { resetGame } from "../../store/word/word-actions";
 
@@ -27,12 +28,22 @@ const PlayAgainButton = styled.div`
 
 function Finish() {
   const dispatch = useDispatch();
+  const [title, setTitle] = useState({ 1: "", 2: "" });
+
+  const { language } = useSelector((state) => state.language);
   const { guessed, usedWordsList } = useSelector((state) => state.word);
+
+  useEffect(() => {
+    language === "English" && setTitle({ 1: "You won! 🏆", 2: "You lost 😟" });
+    language === "Russian" &&
+      setTitle({ 1: "Вы выиграли! 🏆", 2: "Вы проиграли 😟" });
+  }, [language]);
   return (
     <Wrapper>
       <ModalContainer>
-        <Title>{guessed ? "You won! 🏆" : "You lost 😟"}</Title>
-        <StatsContent />
+        <Title>{guessed ? title[1] : title[2]}</Title>
+        {language === "English" && <StatsContentEng />}
+        {language === "Russian" && <StatsContentRus />}
         <h2>
           Solution: {usedWordsList[usedWordsList.length - 1].toUpperCase()}
         </h2>
