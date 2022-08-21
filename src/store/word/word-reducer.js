@@ -212,12 +212,12 @@ export const wordReducer = (state = initialState, { type, payload }) => {
             }
           : state.guessesNumberList,
         gamesPlayed:
-          state.guessed || state.guessesNumber === 5
+          state.guessed || state.guessesNumber === 6
             ? state.gamesPlayed + 1
             : state.gamesPlayed,
         gamesWon: state.guessed ? state.gamesWon + 1 : state.gamesWon,
         gamesLost:
-          !state.guessed && state.guessesNumber === 5
+          !state.guessed && state.guessesNumber === 6
             ? state.gamesLost + 1
             : state.gamesLost,
       };

@@ -67,7 +67,6 @@ function Keyboard({ word, setWord }) {
       }
     };
     newGame && setNewWord();
-    console.log(words);
   }, [lettersNumber, newGame, dispatch, words]);
 
   useEffect(() => {
