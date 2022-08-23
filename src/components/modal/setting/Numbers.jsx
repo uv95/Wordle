@@ -12,6 +12,7 @@ const FlexContainer = styled.div`
 const Number = styled(Button)`
   background-color: ${(props) =>
     props.currentNum ? "var(--color-green)" : "var(--color-btn)"};
+  transition: background-color 0.2s;
 
   &:hover {
     background-color: ${(props) =>

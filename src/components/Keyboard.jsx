@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
@@ -36,6 +36,16 @@ const KeyBtn = styled(Button)`
     if (props.color === "yellow") return "var(--color-yellow)";
     return "var(--color-btn)";
   }};
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: ${(props) => {
+      if (props.color === "gray") return "var(--color-gray)";
+      if (props.color === "green") return "var(--color-green)";
+      if (props.color === "yellow") return "var(--color-yellow)";
+      return "var(--color-btn-hover)";
+    }};
+  }
 `;
 
 function Keyboard({ word, setWord }) {

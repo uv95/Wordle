@@ -12,6 +12,7 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: background-color 0.2s;
 
   &:hover {
     background-color: var(--color-btn-hover);

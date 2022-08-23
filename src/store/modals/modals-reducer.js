@@ -1,9 +1,15 @@
-import { TOGGLE_SETTING, TOGGLE_INFO, TOGGLE_STATS } from "./modals-actions";
+import {
+  TOGGLE_SETTING,
+  TOGGLE_INFO,
+  TOGGLE_STATS,
+  TOGGLE_LANGUAGE,
+} from "./modals-actions";
 
 const initialState = {
   openSetting: false,
   openStats: false,
   openInfo: false,
+  openLanguages: false,
 };
 
 export const modalsReducer = (state = initialState, action) => {
@@ -23,6 +29,8 @@ export const modalsReducer = (state = initialState, action) => {
         ...state,
         openInfo: !state.openInfo,
       };
+    case TOGGLE_LANGUAGE:
+      return { ...state, openLanguages: !state.openLanguages };
     default:
       return state;
   }

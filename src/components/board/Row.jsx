@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import LetterBox from "./LetterBox";
 import { useSelector } from "react-redux";
+import FlippingLetterBox from "./FlippingLetterBox";
 
 const Wrapper = styled.div`
   display: flex;
 `;
 
-function Row({ guess, colors }) {
-  const { lettersNumber } = useSelector((state) => state.word);
+function Row({ guess, colors, wordChecked }) {
+  const { lettersNumber, newGame } = useSelector((state) => state.word);
 
   const obj = {
     5: [0, 1, 2, 3, 4],
@@ -22,9 +22,15 @@ function Row({ guess, colors }) {
   return (
     <Wrapper>
       {obj[lettersNumber].map((letter, i) => (
-        <LetterBox color={colors && colors[i]} key={letter}>
+        <FlippingLetterBox
+          key={letter}
+          color={colors && colors[i]}
+          wordChecked={wordChecked}
+          turn={i}
+          newGame={newGame}
+        >
           {guess[i]?.toUpperCase()}
-        </LetterBox>
+        </FlippingLetterBox>
       ))}
     </Wrapper>
   );

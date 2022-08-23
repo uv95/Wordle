@@ -8,10 +8,10 @@ import {
   toggleSetting,
   toggleStats,
   toggleInfo,
+  toggleLanguage,
 } from "../store/modals/modals-actions";
-import { toggleLanguage } from "../store/language/language-actions";
 import Button from "./Button";
-import Languages from "./languages/Languages";
+import Languages from "./modal/languages/Languages";
 import gb from "../img/gb.svg";
 import ru from "../img/ru.svg";
 import { languages } from "../config";
@@ -42,25 +42,23 @@ const ImgContainer = styled.div`
 
 function Header() {
   const dispatch = useDispatch();
-  const { language, languagesOpen } = useSelector((state) => state.language);
+  const { language } = useSelector((state) => state.language);
   const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const openLanguagesModal = () => dispatch(toggleLanguage(true));
-
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <Button onClick={openLanguagesModal}>
+        <Button onClick={() => dispatch(toggleLanguage(true))}>
           <ImgContainer>
             <img src={language === "English" ? gb : ru} alt="country flag" />
           </ImgContainer>
           {languages[language.toLowerCase()].short}
         </Button>
-        {languagesOpen && <Languages />}
+        <Languages />
         <FlexContainer>
           <Button>
             <FiSettings onClick={() => dispatch(toggleSetting(true))} />

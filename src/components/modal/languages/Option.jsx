@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "../Button";
+import Button from "../../Button";
 import { useSelector, useDispatch } from "react-redux";
-import { setLanguage } from "../../store/language/language-actions";
-import { resetGame } from "../../store/word/word-actions";
+import { setLanguage } from "../../../store/language/language-actions";
+import { resetGame } from "../../../store/word/word-actions";
 
 const Wrapper = styled(Button)`
   border-radius: 1rem;
   width: 15rem;
   background-color: ${(props) =>
     props.lang === props.language ? "var(--color-green)" : "var(--color-btn)"};
-
+    transition: background-color 0.2s;
+    
   &:hover {
     background-color: ${(props) =>
       props.lang === props.language

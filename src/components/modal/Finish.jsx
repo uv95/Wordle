@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Wrapper from "./Wrapper";
 import ModalContainer from "./ModalContainer";
 import Title from "./Title";
 import StatsContentEng from "./stats/StatsContentEng";
 import StatsContentRus from "./stats/StatsContentRus";
 import { useSelector, useDispatch } from "react-redux";
 import { resetGame } from "../../store/word/word-actions";
+
+const Wrapper = styled.div`
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) =>
+    props.theme === "light"
+      ? "rgba(255, 255, 255, 0.4)"
+      : "rgba(0, 0, 0, 0.4)"};
+`;
 
 const PlayAgainButton = styled.div`
   margin: 2rem auto 0 auto;

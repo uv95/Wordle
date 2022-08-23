@@ -18,6 +18,7 @@ const Container = styled(ModalContainer)`
   width: 25rem;
   height: 5rem;
   padding: 1rem;
+  z-index: 2;
 `;
 
 const Text = styled.h2`

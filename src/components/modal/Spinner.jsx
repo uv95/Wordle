@@ -1,26 +1,11 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import React from "react";
+import { increase } from "./animation";
 
 const Container = styled.div`
   display: flex;
   gap: 0.7rem;
   margin: auto;
-`;
-
-const increase = keyframes`
-0% {
-    transform: scale(1);
-}
-20% {
-    transform: scale(1.5);
-    background: var(--color-green);
-
-}
-
-70% {
-    transform: scale(1);
-
-}
 `;
 
 const Box = styled.div`

@@ -5,7 +5,3 @@ export const setLanguage = (lang) => ({
   type: SET_LANGUAGE,
   payload: lang,
 });
-export const toggleLanguage = (open) => ({
-  type: TOGGLE_LANGUAGE,
-  payload: open,
-});

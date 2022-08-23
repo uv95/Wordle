@@ -16,21 +16,22 @@ import {
 
 const initialState = {
   lettersNumber: 5,
-  guesses: [[], [], [], [], [], []],
   lettersColors: [],
+  guesses: [[], [], [], [], [], []],
   guessesNumber: 0,
-  guessesNumberList: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
-  currentWord: [],
   guessed: false,
+  currentWord: [],
   wordExists: true,
+  usedWordsList: [],
+  words: {},
+  newGame: true,
+  keyboard: { green: [], gray: [], yellow: [] },
+  extraLettersHelper: [],
+  //stats:
+  guessesNumberList: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
   gamesWon: 0,
   gamesLost: 0,
   gamesPlayed: 0,
-  usedWordsList: [],
-  newGame: true,
-  extraLettersHelper: [],
-  words: {},
-  keyboard: { green: [], gray: [], yellow: [] },
 };
 
 export const wordReducer = (state = initialState, { type, payload }) => {
@@ -80,6 +81,7 @@ export const wordReducer = (state = initialState, { type, payload }) => {
         ...state,
         lettersColors: [
           ...state.lettersColors,
+          // eslint-disable-next-line
           state.currentWord.map((letter, i) => {
             const allOccuranciesInCurrentWord = state.currentWord
               .map((l, i) => (l === letter ? i : ""))

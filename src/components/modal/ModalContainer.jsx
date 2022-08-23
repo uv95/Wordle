@@ -1,4 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { open, close } from "./animation";
+
+const animation = (props) => css`
+  ${props.closed ? close : open} 0.2s ease
+`;
 
 const ModalContainer = styled.div`
   width: 60%;
@@ -10,5 +15,6 @@ const ModalContainer = styled.div`
   text-align: center;
   position: relative;
   padding: 0 2rem 2rem 2rem;
+  animation: ${animation};
 `;
 export default ModalContainer;

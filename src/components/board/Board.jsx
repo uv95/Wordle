@@ -18,11 +18,12 @@ function Board({ word }) {
   const { guesses, lettersColors } = useSelector((state) => state.word);
   const [loading, setLoading] = useState(true);
 
+  const rows = [0, 1, 2, 3, 4, 5];
+
   useEffect(() => {
     if (word !== "") {
       setLoading(false);
       dispatch(addUsedWord(word));
-      console.log(word, "word");
     }
   }, [word, dispatch]);
 
@@ -30,12 +31,14 @@ function Board({ word }) {
 
   return (
     <Wrapper>
-      <Row colors={lettersColors[0]} guess={guesses[0]} />
-      <Row colors={lettersColors[1]} guess={guesses[1]} />
-      <Row colors={lettersColors[2]} guess={guesses[2]} />
-      <Row colors={lettersColors[3]} guess={guesses[3]} />
-      <Row colors={lettersColors[4]} guess={guesses[4]} />
-      <Row colors={lettersColors[5]} guess={guesses[5]} />
+      {rows.map((row) => (
+        <Row
+          key={row}
+          wordChecked={lettersColors[row] && lettersColors[row].length !== 0}
+          colors={lettersColors[row]}
+          guess={guesses[row]}
+        />
+      ))}
     </Wrapper>
   );
 }
