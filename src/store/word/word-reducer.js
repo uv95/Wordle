@@ -199,7 +199,9 @@ export const wordReducer = (state = initialState, { type, payload }) => {
             (l) => !state.keyboard.green.includes(l)
           ),
           gray: state.keyboard.gray.filter(
-            (l) => !state.keyboard.green.includes(l)
+            (l) =>
+              !state.keyboard.green.includes(l) &&
+              !state.keyboard.yellow.includes(l)
           ),
         },
       };

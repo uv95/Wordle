@@ -99,7 +99,6 @@ function Keyboard({ word, setWord }) {
       }
     };
     newGame && setNewWord();
-    console.log("first");
   }, [lettersNumber, newGame, dispatch, words, setWord]);
 
   useEffect(() => {
