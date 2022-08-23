@@ -40,6 +40,7 @@ const KeyBtn = styled(Button)`
     return "var(--color-btn)";
   }};
   transition: background-color 0.2s;
+  padding: ${(props) => (props.enter ? "0 0.5rem" : "0 1.2rem")};
 
   &:hover {
     background-color: ${(props) => {
@@ -59,8 +60,13 @@ const KeyBtn = styled(Button)`
     font-size: 1.9rem;
   }
   @media (max-width: 26em) {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     min-width: ${(props) => (props.enter ? "5rem" : "6%")};
+    width: ${(props) => (props.enter ? "12rem" : "13%")};
+  }
+  @media (max-width: 17em) {
+    padding: ${(props) => (props.enter ? "0" : "0 0.5rem")};
+    font-size: 1.2rem;
   }
 `;
 
