@@ -12,26 +12,20 @@ const LetterBoxContainer = styled.div`
     ${(props) => {
       return props.wordChecked ? "0.3rem" : "0.4rem";
     }};
-  outline: ${(props) => {
-    return props.wordChecked ? "0.15rem" : "0.25rem";
-  }}
-    solid
-    ${(props) => {
-      return props.wordChecked ? "transparent" : "var(--color-btn)";
-    }};
-  outline-offset: ${(props) => {
-    return props.wordChecked ? "-0.2rem" : "-0.1rem";
+  border: 0.2rem solid  ${(props) => {
+    return props.wordChecked ? "transparent" : "var(--color-btn)";
   }};
   border-radius: 1rem;
+  transform: translateZ(0);
   perspective: 100rem;
   -moz-perspective: 100rem;
   z-index: 1;
   overflow: hidden;
   transition-duration: ${(props) => {
-    return props.newGame ? "none" : `0.7s`;
+    return props.newGame ? "none" : `0.6s`;
   }};
   transition-property: ${(props) => {
-    return props.newGame ? "none" : `width, margin, outline, outline-offset`;
+    return props.newGame ? "none" : `width, margin, border`;
   }};
   transition-delay: ${(props) =>
     `${props.turn === 0 ? 0 : props.turn - props.turn / 1.2}s`}};
