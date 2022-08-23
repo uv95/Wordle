@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
-  margin-bottom: 2rem;
+  padding-bottom: 4rem;
   width: 100%;
 `;
 
@@ -26,6 +26,7 @@ const Row = styled.div`
   display: flex;
   gap: 0.5rem;
   max-width: 100%;
+  justify-content: center;
 `;
 
 const KeyBtn = styled(Button)`
@@ -53,11 +54,13 @@ const KeyBtn = styled(Button)`
     min-width: ${(props) => (props.enter ? "7.5rem" : "3.5rem")};
   }
   @media (max-width: 30em) {
-    min-width: ${(props) => (props.enter ? "4.5rem" : "7%")};
+    min-width: ${(props) => (props.enter ? "6rem" : "8%")};
     border-radius: 0.5rem;
+    font-size: 1.9rem;
   }
   @media (max-width: 26em) {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    min-width: ${(props) => (props.enter ? "5rem" : "6%")};
   }
 `;
 

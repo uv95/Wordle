@@ -43,15 +43,26 @@ const PlayAgainButton = styled.div`
 
 function Finish() {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState({ 1: "", 2: "" });
+  const [title, setTitle] = useState({ 1: "", 2: "", 3: "", 4: "" });
 
   const { language } = useSelector((state) => state.language);
   const { guessed, usedWordsList } = useSelector((state) => state.word);
 
   useEffect(() => {
-    language === "English" && setTitle({ 1: "You won! 🏆", 2: "You lost 😟" });
+    language === "English" &&
+      setTitle({
+        1: "You won! 🏆",
+        2: "You lost 😟",
+        3: "Play again",
+        4: "Solution:",
+      });
     language === "Russian" &&
-      setTitle({ 1: "Вы выиграли! 🏆", 2: "Вы проиграли 😟" });
+      setTitle({
+        1: "Вы выиграли! 🏆",
+        2: "Вы проиграли 😟",
+        3: "Играть снова",
+        4: "Загаданное слово:",
+      });
   }, [language]);
   return (
     <Wrapper>
@@ -60,10 +71,10 @@ function Finish() {
         {language === "English" && <StatsContentEng />}
         {language === "Russian" && <StatsContentRus />}
         <h2>
-          Solution: {usedWordsList[usedWordsList.length - 1].toUpperCase()}
+          {title[4]} {usedWordsList[usedWordsList.length - 1].toUpperCase()}
         </h2>
         <PlayAgainButton onClick={() => dispatch(resetGame())}>
-          Play again
+          {title[3]}
         </PlayAgainButton>
       </ModalContainer>
     </Wrapper>

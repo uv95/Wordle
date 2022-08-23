@@ -33,6 +33,9 @@ const LetterBoxContainer = styled.div`
     @media (max-width: 26em) {
       border-radius: 0.5rem;
      font-size: 2rem;
+     width: ${(props) => {
+       return props.wordChecked ? "5.2rem" : "5rem";
+     }};
      height: 5rem;
 
     }
@@ -41,8 +44,6 @@ const LetterBoxContainer = styled.div`
     }
     @media (max-width: 15em) {
      font-size: 1.5rem;
-     height: 4rem;
-
     }
     `;
 
