@@ -16,19 +16,21 @@ import {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   align-items: center;
   margin-bottom: 2rem;
+  width: 100%;
 `;
 
 const Row = styled.div`
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  max-width: 100%;
 `;
 
 const KeyBtn = styled(Button)`
+  min-width: ${(props) => (props.enter ? "7.5rem" : "4rem")};
   height: 5rem;
-  min-width: 4rem;
   font-size: 2rem;
   background-color: ${(props) => {
     if (props.color === "gray") return "var(--color-gray)";
@@ -45,6 +47,17 @@ const KeyBtn = styled(Button)`
       if (props.color === "yellow") return "var(--color-yellow)";
       return "var(--color-btn-hover)";
     }};
+  }
+
+  @media (max-width: 35em) {
+    min-width: ${(props) => (props.enter ? "7.5rem" : "3.5rem")};
+  }
+  @media (max-width: 30em) {
+    min-width: ${(props) => (props.enter ? "4.5rem" : "7%")};
+    border-radius: 0.5rem;
+  }
+  @media (max-width: 26em) {
+    font-size: 1.2rem;
   }
 `;
 
@@ -77,7 +90,8 @@ function Keyboard({ word, setWord }) {
       }
     };
     newGame && setNewWord();
-  }, [lettersNumber, newGame, dispatch, words]);
+    console.log("first");
+  }, [lettersNumber, newGame, dispatch, words, setWord]);
 
   useEffect(() => {
     wordExists && currentWord.length && dispatch(checkWord(word));
@@ -128,7 +142,7 @@ function Keyboard({ word, setWord }) {
         ))}
       </Row>
       <Row>
-        <KeyBtn onClick={checkExistence}>
+        <KeyBtn onClick={checkExistence} enter>
           {languages[language.toLowerCase()].keyboard.enter.toUpperCase()}
         </KeyBtn>
         {languages[language.toLowerCase()].keyboard.third.map((key) => (
@@ -141,7 +155,10 @@ function Keyboard({ word, setWord }) {
           </KeyBtn>
         ))}
         <KeyBtn>
-          <FiArrowLeft onClick={() => dispatch(removeLetter())} />
+          <FiArrowLeft
+            style={{ minWidth: "1.5rem" }}
+            onClick={() => dispatch(removeLetter())}
+          />
         </KeyBtn>
       </Row>
     </Wrapper>

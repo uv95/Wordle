@@ -35,6 +35,21 @@ const LetterBoxContainer = styled.div`
   }};
   transition-delay: ${(props) =>
     `${props.turn === 0 ? 0 : props.turn - props.turn / 1.2}s`}};
+   
+    @media (max-width: 26em) {
+      border-radius: 0.5rem;
+     font-size: 2rem;
+     height: 5rem;
+
+    }
+    @media (max-width: 21em) {
+     font-size: 1.7rem;
+    }
+    @media (max-width: 15em) {
+     font-size: 1.5rem;
+     height: 4rem;
+
+    }
     `;
 
 const LetterBoxInner = styled.div`
@@ -61,6 +76,10 @@ const LetterBoxFront = styled.div`
     `${props.turn === 0 ? 0 : props.turn - props.turn / 1.2}s`};
   transform: ${(props) =>
     props.wordChecked ? "rotateY(180deg)" : "rotateY(0deg)"};
+
+  @media (max-width: 26em) {
+    border-radius: 0.5rem;
+  }
 `;
 
 const LetterBoxBack = styled(LetterBoxFront)`
@@ -76,6 +95,10 @@ const LetterBoxBack = styled(LetterBoxFront)`
   }};
   transform: ${(props) =>
     props.wordChecked ? "rotateY(0deg)" : "rotateY(-180deg)"};
+
+  @media (max-width: 26em) {
+    border-radius: 0.5rem;
+  }
 `;
 
 function FlippingLetterBox({ children, wordChecked, color, turn, newGame }) {

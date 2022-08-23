@@ -17,6 +17,13 @@ const Button = styled.div`
   &:hover {
     background-color: var(--color-btn-hover);
   }
+
+  @media (max-width: 26em) {
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    height: 2.5em;
+    min-width: 3rem;
+  }
 `;
 
 export default Button;

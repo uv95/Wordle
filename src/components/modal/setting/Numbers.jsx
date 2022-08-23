@@ -7,6 +7,15 @@ import { setWordLength } from "../../../store/word/word-actions";
 const FlexContainer = styled.div`
   display: flex;
   gap: 0.5rem;
+  margin-left: 2rem;
+
+  @media (max-width: 39em) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media (max-width: 18em) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const Number = styled(Button)`
@@ -17,6 +26,12 @@ const Number = styled(Button)`
   &:hover {
     background-color: ${(props) =>
       props.currentNum ? "var(--color-green)" : "var(--color-btn-hover)"};
+  }
+
+  @media (max-width: 26em) {
+    height: 3rem;
+    width: 2rem;
+    font-size: 1.5rem;
   }
 `;
 

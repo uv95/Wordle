@@ -23,6 +23,10 @@ const StatsBox = styled.div`
 const Number = styled.h3`
   font-size: 3rem;
   font-weight: 700;
+
+  @media (max-width: 15em) {
+    font-size: 2.5rem;
+  }
 `;
 
 function StatsContentRus() {

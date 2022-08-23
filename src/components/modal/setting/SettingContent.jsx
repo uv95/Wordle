@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../../../store/theme/theme-actions";
 
 const Section = styled.div`
-  height: 5rem;
+  min-height: 5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,6 +31,16 @@ const Section = styled.div`
 const SectionTitle = styled.h3`
   font-size: 2.5rem;
   font-weight: 500;
+
+  @media (max-width: 29em) {
+    font-size: 2rem;
+  }
+  @media (max-width: 26em) {
+    font-size: 1.8rem;
+  }
+  @media (max-width: 18em) {
+    font-size: 1.5rem;
+  }
 `;
 
 function SettingContent() {

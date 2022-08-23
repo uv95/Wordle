@@ -10,17 +10,27 @@ const Wrapper = styled(Button)`
   width: 15rem;
   background-color: ${(props) =>
     props.lang === props.language ? "var(--color-green)" : "var(--color-btn)"};
-    transition: background-color 0.2s;
-    
+  transition: background-color 0.2s;
+
   &:hover {
     background-color: ${(props) =>
       props.lang === props.language
         ? "var(--color-green)"
-        : "var(--color-btn-hover)"}
+        : "var(--color-btn-hover)"};
+  }
+  @media (max-width: 26em) {
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    width: 10rem;
+  }
 `;
 
 const ImgContainer = styled.div`
   width: 2rem;
+
+  @media (max-width: 26em) {
+    width: 1.5rem;
+  }
 `;
 
 function Option({ lang, flag }) {

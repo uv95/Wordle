@@ -15,6 +15,12 @@ const GridContainer = styled.div`
   row-gap: 1rem;
   justify-items: center;
   padding-bottom: 1rem;
+
+  @media (max-width: 18em) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 function Languages() {

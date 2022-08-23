@@ -10,9 +10,9 @@ import Finish from "./modal/Finish";
 import Message from "./modal/Message";
 
 const Wrapper = styled.main`
-  width: 100%;
   min-height: calc(100vh - 6rem);
-  margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

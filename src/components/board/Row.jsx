@@ -5,6 +5,7 @@ import FlippingLetterBox from "./FlippingLetterBox";
 
 const Wrapper = styled.div`
   display: flex;
+  max-width: 100%;
 `;
 
 function Row({ guess, colors, wordChecked }) {

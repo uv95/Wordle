@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { open, close } from "./animation";
 
-const animation = (props) => css`
+const toggleModal = (props) => css`
   ${props.closed ? close : open} 0.2s ease
 `;
 
@@ -15,6 +15,13 @@ const ModalContainer = styled.div`
   text-align: center;
   position: relative;
   padding: 0 2rem 2rem 2rem;
-  animation: ${animation};
+  animation: ${toggleModal};
+
+  @media (max-width: 56em) {
+    width: 85%;
+  }
+  @media (max-width: 18em) {
+    padding: 0 1rem 1rem 1rem;
+  }
 `;
 export default ModalContainer;

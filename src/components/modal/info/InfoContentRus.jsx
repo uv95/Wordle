@@ -1,6 +1,6 @@
 import React from "react";
 import WordExample from "./WordExample";
-import ColorsExplanationRus from "./ColorsExplanationRus";
+import ColorsExplanationRus from "./colorsExplanation/ColorsExplanationRus";
 import Text from "../Text";
 
 function InfoContentRus() {

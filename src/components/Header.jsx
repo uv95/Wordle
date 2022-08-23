@@ -23,12 +23,17 @@ const HeaderWrapper = styled.header`
   align-items: center;
   background-color: var(--color-bg);
   color: var(--color-text);
+  width: 100%;
 `;
 
 const HeaderContainer = styled.div`
-  width: 50%;
+  width: 60%;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 33em) {
+    width: 80%;
+  }
 `;
 
 const FlexContainer = styled.div`

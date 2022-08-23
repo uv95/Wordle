@@ -1,6 +1,6 @@
 import React from "react";
 import WordExample from "./WordExample";
-import ColorsExplanationEng from "./ColorsExplanationEng";
+import ColorsExplanationEng from "./colorsExplanation/ColorsExplanationEng";
 import Text from "../Text";
 
 function InfoContentEng() {
