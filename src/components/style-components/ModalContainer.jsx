@@ -1,8 +1,8 @@
-import styled, { css } from "styled-components";
-import { open, close } from "./animation";
+import styled, { css } from 'styled-components';
+import { open, close } from '../modal/animation';
 
 const toggleModal = (props) => css`
-  ${props.closed ? close : open} 0.2s ease
+  ${props.isClosed ? close : open} 0.2s ease
 `;
 
 const ModalContainer = styled.div`

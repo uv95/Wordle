@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import ModalContainer from "./ModalContainer";
-import Title from "./Title";
-import StatsContentEng from "./stats/StatsContentEng";
-import StatsContentRus from "./stats/StatsContentRus";
-import { useSelector, useDispatch } from "react-redux";
-import { resetGame } from "../../store/word/word-actions";
+import React, { useMemo } from 'react';
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { resetGame } from '../../store/word/word-actions';
+import StatsContent from './stats/StatsContent';
+import Title from '../style-components/Title';
+import ModalContainer from '../style-components/ModalContainer';
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,9 +17,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
-    props.theme === "light"
-      ? "rgba(255, 255, 255, 0.4)"
-      : "rgba(0, 0, 0, 0.4)"};
+    props.theme === 'light'
+      ? 'rgba(255, 255, 255, 0.4)'
+      : 'rgba(0, 0, 0, 0.4)'};
 `;
 
 const PlayAgainButton = styled.div`
@@ -43,42 +42,35 @@ const PlayAgainButton = styled.div`
 
 function Finish() {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState({ 1: "", 2: "", 3: "", 4: "" });
-
   const { language } = useSelector((state) => state.language);
-  const { guessed, usedWordsList } = useSelector((state) => state.word);
+  const { isGuessed, usedWordsList } = useSelector((state) => state.word);
 
-  useEffect(() => {
-    language === "English" &&
-      setTitle({
-        1: "You won! 🏆",
-        2: "You lost 😟",
-        3: "Play again",
-        4: "Solution:",
-      });
-    language === "Russian" &&
-      setTitle({
-        1: "Вы выиграли! 🏆",
-        2: "Вы проиграли 😟",
-        3: "Играть снова",
-        4: "Загаданное слово:",
-      });
+  const text = useMemo(() => {
+    if (language === 'English')
+      return ['You won! 🏆', 'You lost 😟', 'Play again', 'Solution:'];
+    if (language === 'Russian')
+      return [
+        'Вы выиграли! 🏆',
+        'Вы проиграли 😟',
+        'Играть снова',
+        'Загаданное слово:',
+      ];
   }, [language]);
+
   return (
     <Wrapper>
       <ModalContainer>
-        <Title>{guessed ? title[1] : title[2]}</Title>
-        {language === "English" && <StatsContentEng />}
-        {language === "Russian" && <StatsContentRus />}
+        <Title>{isGuessed ? text[0] : text[1]}</Title>
+        <StatsContent />
         <h2>
-          {title[4]} {usedWordsList[usedWordsList.length - 1].toUpperCase()}
+          {text[3]} {usedWordsList[usedWordsList.length - 1].toUpperCase()}
         </h2>
         <PlayAgainButton onClick={() => dispatch(resetGame())}>
-          {title[3]}
+          {text[2]}
         </PlayAgainButton>
       </ModalContainer>
     </Wrapper>
   );
 }
 
-export default Finish;
+export default React.memo(Finish);

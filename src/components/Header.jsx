@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { FiSettings } from "react-icons/fi";
-import { FiBarChart2 } from "react-icons/fi";
-import { FiHelpCircle } from "react-icons/fi";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { FiSettings } from 'react-icons/fi';
+import { FiBarChart2 } from 'react-icons/fi';
+import { FiHelpCircle } from 'react-icons/fi';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   toggleSetting,
   toggleStats,
   toggleInfo,
   toggleLanguage,
-} from "../store/modals/modals-actions";
-import Button from "./Button";
-import Languages from "./modal/languages/Languages";
-import gb from "../img/gb.svg";
-import ru from "../img/ru.svg";
-import { languages } from "../config";
+} from '../store/modals/modals-actions';
+import Languages from './modal/languages/Languages';
+import gb from '../img/gb.svg';
+import ru from '../img/ru.svg';
+import { languages } from '../utils';
+import { Button } from './style-components/Button';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -51,7 +51,7 @@ function Header() {
   const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
+    document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
   return (
@@ -59,7 +59,7 @@ function Header() {
       <HeaderContainer>
         <Button onClick={() => dispatch(toggleLanguage(true))}>
           <ImgContainer>
-            <img src={language === "English" ? gb : ru} alt="country flag" />
+            <img src={language === 'English' ? gb : ru} alt="country flag" />
           </ImgContainer>
           {languages[language.toLowerCase()].short}
         </Button>

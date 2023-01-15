@@ -1,8 +1,8 @@
-import { createStore, compose, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { rootReducer } from "./root-reducer";
-import { saveState, loadState } from "./local-storage";
-import throttle from "lodash/throttle";
+import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { rootReducer } from './root-reducer';
+import { saveState, loadState } from './local-storage';
+import throttle from 'lodash/throttle';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistedState = loadState();
@@ -23,22 +23,22 @@ store.subscribe(
           languagesOpen: false,
         },
         word: {
-          lettersNumber: store.getState().word.lettersNumber,
+          numLetters: store.getState().word.numLetters,
           guesses: [[], [], [], [], [], []],
           lettersColors: [],
-          guessesNumber: 0,
+          numGuesses: 0,
           currentWord: [],
-          guessed: false,
+          isGuessed: false,
           wordExists: true,
           usedWordsList: [],
-          newGame: true,
+          isNewGame: true,
           extraLettersHelper: [],
-          words: {},
+          allWords: {},
           keyboard: { green: [], gray: [], yellow: [] },
-          gamesLost: store.getState().word.gamesLost,
-          gamesWon: store.getState().word.gamesWon,
-          guessesNumberList: store.getState().word.guessesNumberList,
-          gamesPlayed: store.getState().word.gamesPlayed,
+          numGameslost: store.getState().word.numGameslost,
+          numGamesWon: store.getState().word.numGamesWon,
+          numGuessesList: store.getState().word.numGuessesList,
+          numGamesPlayed: store.getState().word.numGamesPlayed,
         },
       }),
     1000

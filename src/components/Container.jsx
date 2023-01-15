@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import Setting from "./modal/setting/Setting";
-import Board from "./board/Board";
-import Keyboard from "./Keyboard";
-import Info from "./modal/info/Info";
-import Stats from "./modal/stats/Stats";
-import { useSelector } from "react-redux";
-import Finish from "./modal/Finish";
-import Message from "./modal/Message";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Setting from './modal/setting/Setting';
+import Board from './board/Board';
+import Keyboard from './Keyboard';
+import Info from './modal/info/Info';
+import Stats from './modal/stats/Stats';
+import { useSelector } from 'react-redux';
+import Finish from './modal/Finish';
+import Message from './modal/Message';
 
 const Wrapper = styled.main`
   min-height: calc(100vh - 6rem);
@@ -21,10 +21,10 @@ const Wrapper = styled.main`
 `;
 
 function Container() {
-  const { guessed, guessesNumber, wordExists } = useSelector(
+  const { isGuessed, numGuesses, wordExists } = useSelector(
     (state) => state.word
   );
-  const [word, setWord] = useState("");
+  const [word, setWord] = useState('');
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function Container() {
       {showMessage && <Message />}
       <Board word={word} />
       <Keyboard word={word} setWord={setWord} />
-      {(guessed || guessesNumber === 6) && <Finish />}
+      {(isGuessed || numGuesses === 6) && <Finish />}
     </Wrapper>
   );
 }

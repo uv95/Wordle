@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { FiArrowLeft } from "react-icons/fi";
-import { useSelector, useDispatch } from "react-redux";
-import { languages, englishWords, russianWords } from "../config";
-import Button from "./Button";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { FiArrowLeft } from 'react-icons/fi';
+import { useSelector, useDispatch } from 'react-redux';
+import { languages, englishWords, russianWords } from '../utils';
 import {
   addLetter,
   removeLetter,
@@ -11,7 +10,8 @@ import {
   checkWordExistence,
   clearCurrentWord,
   setWords,
-} from "../store/word/word-actions";
+} from '../store/word/word-actions';
+import { KeyBtn } from './style-components/Button';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,77 +29,36 @@ const Row = styled.div`
   justify-content: center;
 `;
 
-const KeyBtn = styled(Button)`
-  min-width: ${(props) => (props.enter ? "7.5rem" : "4rem")};
-  height: 5rem;
-  font-size: 2rem;
-  background-color: ${(props) => {
-    if (props.color === "gray") return "var(--color-gray)";
-    if (props.color === "green") return "var(--color-green)";
-    if (props.color === "yellow") return "var(--color-yellow)";
-    return "var(--color-btn)";
-  }};
-  transition: background-color 0.2s;
-  padding: ${(props) => (props.enter ? "0 0.5rem" : "0 1.2rem")};
-
-  &:hover {
-    background-color: ${(props) => {
-      if (props.color === "gray") return "var(--color-gray)";
-      if (props.color === "green") return "var(--color-green)";
-      if (props.color === "yellow") return "var(--color-yellow)";
-      return "var(--color-btn-hover)";
-    }};
-  }
-
-  @media (max-width: 35em) {
-    min-width: ${(props) => (props.enter ? "7.5rem" : "3.5rem")};
-  }
-  @media (max-width: 30em) {
-    min-width: ${(props) => (props.enter ? "6rem" : "8%")};
-    border-radius: 0.5rem;
-    font-size: 1.9rem;
-  }
-  @media (max-width: 26em) {
-    font-size: 1.6rem;
-    min-width: ${(props) => (props.enter ? "5rem" : "6%")};
-    width: ${(props) => (props.enter ? "12rem" : "13%")};
-  }
-  @media (max-width: 17em) {
-    padding: ${(props) => (props.enter ? "0" : "0 0.5rem")};
-    font-size: 1.2rem;
-  }
-`;
-
 function Keyboard({ word, setWord }) {
   const dispatch = useDispatch();
   const { language } = useSelector((state) => state.language);
   const {
     guesses,
-    guessesNumber,
-    lettersNumber,
-    newGame,
+    numGuesses,
+    numLetters,
+    isNewGame,
     keyboard,
     wordExists,
     currentWord,
-    words,
+    allWords,
   } = useSelector((state) => state.word);
 
   useEffect(() => {
-    language === "English" && dispatch(setWords(englishWords));
-    language === "Russian" && dispatch(setWords(russianWords));
+    language === 'English' && dispatch(setWords(englishWords));
+    language === 'Russian' && dispatch(setWords(russianWords));
   }, [language, dispatch]);
 
   useEffect(() => {
     const setNewWord = () => {
-      if (words[lettersNumber]) {
+      if (allWords[numLetters]) {
         const randomNumber = Math.floor(
-          Math.random() * words[lettersNumber].length
+          Math.random() * allWords[numLetters].length
         );
-        setWord(words[lettersNumber][randomNumber]);
+        setWord(allWords[numLetters][randomNumber]);
       }
     };
-    newGame && setNewWord();
-  }, [lettersNumber, newGame, dispatch, words, setWord]);
+    isNewGame && setNewWord();
+  }, [numLetters, isNewGame, dispatch, allWords, setWord]);
 
   useEffect(() => {
     wordExists && currentWord.length && dispatch(checkWord(word));
@@ -112,17 +71,17 @@ function Keyboard({ word, setWord }) {
   const checkExistence = () => {
     dispatch(
       checkWordExistence(
-        words[lettersNumber],
-        guesses[guessesNumber].length,
-        lettersNumber
+        allWords[numLetters],
+        guesses[numGuesses].length,
+        numLetters
       )
     );
   };
 
   const setKeyColor = (key) => {
-    if (keyboard.green.includes(key)) return "green";
-    if (keyboard.gray.includes(key)) return "gray";
-    if (keyboard.yellow.includes(key)) return "yellow";
+    if (keyboard.green.includes(key)) return 'green';
+    if (keyboard.gray.includes(key)) return 'gray';
+    if (keyboard.yellow.includes(key)) return 'yellow';
   };
 
   return (
@@ -150,7 +109,7 @@ function Keyboard({ word, setWord }) {
         ))}
       </Row>
       <Row>
-        <KeyBtn onClick={checkExistence} enter>
+        <KeyBtn onClick={checkExistence} isEnter>
           {languages[language.toLowerCase()].keyboard.enter.toUpperCase()}
         </KeyBtn>
         {languages[language.toLowerCase()].keyboard.third.map((key) => (
@@ -164,7 +123,7 @@ function Keyboard({ word, setWord }) {
         ))}
         <KeyBtn>
           <FiArrowLeft
-            style={{ minWidth: "1.5rem" }}
+            style={{ minWidth: '1.5rem' }}
             onClick={() => dispatch(removeLetter())}
           />
         </KeyBtn>

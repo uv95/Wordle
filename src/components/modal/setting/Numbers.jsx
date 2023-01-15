@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Button from "../../Button";
-import { useDispatch, useSelector } from "react-redux";
-import { setWordLength } from "../../../store/word/word-actions";
+import React from 'react';
+import styled from 'styled-components';
+import { Button } from '../../style-components/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { setWordLength } from '../../../store/word/word-actions';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -20,12 +20,12 @@ const FlexContainer = styled.div`
 
 const Number = styled(Button)`
   background-color: ${(props) =>
-    props.currentNum ? "var(--color-green)" : "var(--color-btn)"};
+    props.currentNum ? 'var(--color-green)' : 'var(--color-btn)'};
   transition: background-color 0.2s;
 
   &:hover {
     background-color: ${(props) =>
-      props.currentNum ? "var(--color-green)" : "var(--color-btn-hover)"};
+      props.currentNum ? 'var(--color-green)' : 'var(--color-btn-hover)'};
   }
 
   @media (max-width: 26em) {
@@ -37,7 +37,7 @@ const Number = styled(Button)`
 
 function Numbers() {
   const dispatch = useDispatch();
-  const { lettersNumber } = useSelector((state) => state.word);
+  const { numLetters } = useSelector((state) => state.word);
   const numbers = [5, 6, 7, 8, 9, 10];
 
   return (
@@ -45,7 +45,7 @@ function Numbers() {
       {numbers.map((num) => (
         <Number
           key={num}
-          currentNum={num === lettersNumber}
+          currentNum={num === numLetters}
           onClick={() => dispatch(setWordLength(num))}
         >
           {num}

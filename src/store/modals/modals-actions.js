@@ -1,21 +1,21 @@
-export const TOGGLE_SETTING = "@@modals/TOGGLE_SETTING";
-export const TOGGLE_STATS = "@@modals/TOGGLE_STATS";
-export const TOGGLE_INFO = "@@modals/TOGGLE_INFO";
-export const TOGGLE_LANGUAGE = "@@modals/TOGGLE_LANGUAGE";
+export const TOGGLE_SETTING = '@@modals/TOGGLE_SETTING';
+export const TOGGLE_STATS = '@@modals/TOGGLE_STATS';
+export const TOGGLE_INFO = '@@modals/TOGGLE_INFO';
+export const TOGGLE_LANGUAGE = '@@modals/TOGGLE_LANGUAGE';
 
-export const toggleSetting = (open) => ({
+export const toggleSetting = (payload) => ({
   type: TOGGLE_SETTING,
-  payload: open,
+  payload,
 });
-export const toggleStats = (open) => ({
+export const toggleStats = (payload) => ({
   type: TOGGLE_STATS,
-  payload: open,
+  payload,
 });
-export const toggleInfo = (open) => ({
+export const toggleInfo = (payload) => ({
   type: TOGGLE_INFO,
-  payload: open,
+  payload,
 });
-export const toggleLanguage = (open) => ({
+export const toggleLanguage = (payload) => ({
   type: TOGGLE_LANGUAGE,
-  payload: open,
+  payload,
 });

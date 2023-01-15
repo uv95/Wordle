@@ -1,19 +1,19 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const LetterBoxContainer = styled.div`
   font-size: 2.5rem;
   font-weight: 700;
   height: 6rem;
   width: ${(props) => {
-    return props.wordChecked ? "6.2rem" : "6rem";
+    return props.isWordChecked ? '6.2rem' : '6rem';
   }};
   margin: 0.4rem
     ${(props) => {
-      return props.wordChecked ? "0.3rem" : "0.4rem";
+      return props.isWordChecked ? '0.3rem' : '0.4rem';
     }};
   border: 0.2rem solid  ${(props) => {
-    return props.wordChecked ? "transparent" : "var(--color-btn)";
+    return props.isWordChecked ? 'transparent' : 'var(--color-btn)';
   }};
   border-radius: 1rem;
   transform: translateZ(0);
@@ -22,19 +22,21 @@ const LetterBoxContainer = styled.div`
   z-index: 1;
   overflow: hidden;
   transition-duration: ${(props) => {
-    return props.newGame ? "none" : `0.6s`;
+    return props.isNewGame ? 'none' : `0.6s`;
   }};
   transition-property: ${(props) => {
-    return props.newGame ? "none" : `width, margin, border`;
+    return props.isNewGame ? 'none' : `width, margin, border`;
   }};
   transition-delay: ${(props) =>
-    `${props.turn === 0 ? 0 : props.turn - props.turn / 1.2}s`}};
+    `${
+      props.letterIndex === 0 ? 0 : props.letterIndex - props.letterIndex / 1.2
+    }s`}};
    
     @media (max-width: 26em) {
       border-radius: 0.5rem;
      font-size: 2rem;
      width: ${(props) => {
-       return props.wordChecked ? "5.2rem" : "5rem";
+       return props.isWordChecked ? '5.2rem' : '5rem';
      }};
      height: 5rem;
 
@@ -65,12 +67,14 @@ const LetterBoxFront = styled.div`
   justify-content: center;
   align-items: center;
   transition: ${(props) => {
-    return props.newGame ? "none" : "transform 0.5s";
+    return props.isNewGame ? 'none' : 'transform 0.5s';
   }};
   transition-delay: ${(props) =>
-    `${props.turn === 0 ? 0 : props.turn - props.turn / 1.2}s`};
+    `${
+      props.letterIndex === 0 ? 0 : props.letterIndex - props.letterIndex / 1.2
+    }s`};
   transform: ${(props) =>
-    props.wordChecked ? "rotateY(180deg)" : "rotateY(0deg)"};
+    props.isWordChecked ? 'rotateY(180deg)' : 'rotateY(0deg)'};
 
   @media (max-width: 26em) {
     border-radius: 0.5rem;
@@ -79,40 +83,52 @@ const LetterBoxFront = styled.div`
 
 const LetterBoxBack = styled(LetterBoxFront)`
   transition: ${(props) => {
-    return props.newGame ? "none" : "transform 0.5s";
+    return props.isNewGame ? 'none' : 'transform 0.5s';
   }};
   transition-delay: ${(props) =>
-    `${props.turn === 0 ? 0 : props.turn - props.turn / 1.2}s`};
+    `${
+      props.letterIndex === 0 ? 0 : props.letterIndex - props.letterIndex / 1.2
+    }s`};
   background-color: ${(props) => {
-    if (props.color === "gray") return "var(--color-gray)";
-    if (props.color === "green") return "var(--color-green)";
-    if (props.color === "yellow") return "var(--color-yellow)";
+    if (props.color === 'gray') return 'var(--color-gray)';
+    if (props.color === 'green') return 'var(--color-green)';
+    if (props.color === 'yellow') return 'var(--color-yellow)';
   }};
   transform: ${(props) =>
-    props.wordChecked ? "rotateY(0deg)" : "rotateY(-180deg)"};
+    props.isWordChecked ? 'rotateY(0deg)' : 'rotateY(-180deg)'};
 
   @media (max-width: 26em) {
     border-radius: 0.5rem;
   }
 `;
 
-function FlippingLetterBox({ children, wordChecked, color, turn, newGame }) {
+function FlippingLetterBox({
+  children,
+  isWordChecked,
+  color,
+  letterIndex,
+  isNewGame,
+}) {
   return (
     <LetterBoxContainer
       color={color}
-      wordChecked={wordChecked}
-      turn={turn}
-      newGame={newGame}
+      isWordChecked={isWordChecked}
+      letterIndex={letterIndex}
+      isNewGame={isNewGame}
     >
       <LetterBoxInner>
-        <LetterBoxFront wordChecked={wordChecked} turn={turn} newGame={newGame}>
+        <LetterBoxFront
+          isWordChecked={isWordChecked}
+          letterIndex={letterIndex}
+          isNewGame={isNewGame}
+        >
           {children}
         </LetterBoxFront>
         <LetterBoxBack
-          wordChecked={wordChecked}
+          isWordChecked={isWordChecked}
           color={color}
-          turn={turn}
-          newGame={newGame}
+          letterIndex={letterIndex}
+          isNewGame={isNewGame}
         >
           {children}
         </LetterBoxBack>

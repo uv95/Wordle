@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import React from "react";
-import { increase } from "./animation";
+import styled from 'styled-components';
+import React from 'react';
+import { increase } from './animation';
 
 const Container = styled.div`
   display: flex;
@@ -16,19 +16,15 @@ const Box = styled.div`
   animation-name: ${increase};
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
-  animation-delay: ${(props) => {
-    if (props.num === 1) return "0s";
-    if (props.num === 2) return ".5s";
-    if (props.num === 3) return "1s";
-  }};
+  animation-delay: ${(props) => `${props.delay}s`};
 `;
 
 function Spinner() {
   return (
     <Container>
-      <Box num={1} />
-      <Box num={2} />
-      <Box num={3} />
+      <Box delay={0} />
+      <Box delay={0.5} />
+      <Box delay={1} />
     </Container>
   );
 }

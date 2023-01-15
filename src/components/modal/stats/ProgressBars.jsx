@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Title from "../Title";
-import styled from "styled-components";
-import Text from "../Text";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import Title from '../../style-components/Title';
+import styled from 'styled-components';
+import Text from '../../style-components/Text';
+import { useSelector } from 'react-redux';
 
 const Line = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const Bar = styled.div`
   overflow: hidden;
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     background-color: var(--color-green);
     top: 0;
@@ -33,19 +33,19 @@ const Bar = styled.div`
 `;
 
 function ProgressBars() {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [maxRepeatedValue, setMaxRepeatedValue] = useState(0);
-  const { guessesNumberList } = useSelector((state) => state.word);
+  const { numGuessesList } = useSelector((state) => state.word);
   const guessesDistribution = [1, 2, 3, 4, 5, 6];
   const { language } = useSelector((state) => state.language);
 
   useEffect(() => {
-    setMaxRepeatedValue(Math.max(...Object.values(guessesNumberList)));
-  }, [guessesNumberList]);
+    setMaxRepeatedValue(Math.max(...Object.values(numGuessesList)));
+  }, [numGuessesList]);
 
   useEffect(() => {
-    language === "English" && setTitle("Guess distribution");
-    language === "Russian" && setTitle("Попытки");
+    language === 'English' && setTitle('Guess distribution');
+    language === 'Russian' && setTitle('Попытки');
   }, [language]);
 
   return (
@@ -53,9 +53,9 @@ function ProgressBars() {
       <Title>{title}</Title>
       {guessesDistribution.map((guess) => (
         <Line key={guess}>
-          <Text>{guess}</Text>{" "}
-          <Bar max={maxRepeatedValue} value={guessesNumberList[guess]} />{" "}
-          <Text bold>{guessesNumberList[guess]}</Text>
+          <Text>{guess}</Text>{' '}
+          <Bar max={maxRepeatedValue} value={numGuessesList[guess]} />{' '}
+          <Text isBold>{numGuessesList[guess]}</Text>
         </Line>
       ))}
     </>

@@ -1,23 +1,19 @@
-import React from "react";
-import StatsContentEng from "./StatsContentEng";
-import StatsContentRus from "./StatsContentRus";
-import { useSelector } from "react-redux";
-import { toggleStats } from "../../../store/modals/modals-actions";
-import Modal from "../Modal";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { toggleStats } from '../../../store/modals/modals-actions';
+import Modal from '../Modal';
+import StatsContent from './StatsContent';
 
 function Stats() {
-  const { openStats } = useSelector((state) => state.modals);
-  const { language } = useSelector((state) => state.language);
+  const { isStatsOpen } = useSelector((state) => state.modals);
 
-  if (openStats)
+  if (isStatsOpen)
     return (
       <Modal
         toggle={toggleStats}
-        titleEng={"Statistics"}
-        titleRus={"Статистика"}
+        title={{ english: 'Statistics', russian: 'Статистика' }}
       >
-        {language === "English" && <StatsContentEng />}
-        {language === "Russian" && <StatsContentRus />}
+        <StatsContent />
       </Modal>
     );
 }

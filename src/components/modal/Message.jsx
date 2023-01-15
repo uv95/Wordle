@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import ModalContainer from "./ModalContainer";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import ModalContainer from '../style-components/ModalContainer';
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,12 +27,12 @@ const Text = styled.h2`
 `;
 
 function Message() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const { language } = useSelector((state) => state.language);
 
   useEffect(() => {
-    language === "English" && setText("No such word");
-    language === "Russian" && setText("Нет такого слова");
+    language === 'English' && setText('No such word');
+    language === 'Russian' && setText('Нет такого слова');
   }, [language]);
   return (
     <Wrapper>

@@ -8,18 +8,18 @@ const Wrapper = styled.div`
   max-width: 100%;
 `;
 
-function Row({ guess, colors, wordChecked }) {
-  const { lettersNumber, newGame } = useSelector((state) => state.word);
+function Row({ guess, colors, isWordChecked }) {
+  const { numLetters, isNewGame } = useSelector((state) => state.word);
 
   return (
     <Wrapper>
-      {[...Array(lettersNumber)].map((letter, i) => (
+      {[...Array(numLetters)].map((_, i) => (
         <FlippingLetterBox
-          key={letter}
+          key={i}
           color={colors && colors[i]}
-          wordChecked={wordChecked}
-          turn={i}
-          newGame={newGame}
+          isWordChecked={isWordChecked}
+          letterIndex={i}
+          isNewGame={isNewGame}
         >
           {guess[i]?.toUpperCase()}
         </FlippingLetterBox>

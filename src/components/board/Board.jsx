@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import Row from "./Row";
-import { useSelector, useDispatch } from "react-redux";
-import { addUsedWord } from "../../store/word/word-actions";
-import Spinner from "../modal/Spinner";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Row from './Row';
+import { useSelector, useDispatch } from 'react-redux';
+import { addUsedWord } from '../../store/word/word-actions';
+import Spinner from '../modal/Spinner';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,25 +19,25 @@ const Wrapper = styled.div`
 function Board({ word }) {
   const dispatch = useDispatch();
   const { guesses, lettersColors } = useSelector((state) => state.word);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const rows = [0, 1, 2, 3, 4, 5];
 
   useEffect(() => {
-    if (word !== "") {
-      setLoading(false);
+    if (word !== '') {
+      setIsLoading(false);
       dispatch(addUsedWord(word));
     }
   }, [word, dispatch]);
 
-  if (loading) return <Spinner />;
+  if (isLoading) return <Spinner />;
 
   return (
     <Wrapper>
       {rows.map((row) => (
         <Row
           key={row}
-          wordChecked={lettersColors[row] && lettersColors[row].length !== 0}
+          isWordChecked={lettersColors[row] && lettersColors[row].length !== 0}
           colors={lettersColors[row]}
           guess={guesses[row]}
         />

@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import gb from "../../../img/gb.svg";
-import ru from "../../../img/ru.svg";
-import Option from "./Option";
-import { languages } from "../../../config";
-import { useSelector } from "react-redux";
-import { toggleLanguage } from "../../../store/modals/modals-actions";
-import Modal from "../Modal";
+import React from 'react';
+import styled from 'styled-components';
+import gb from '../../../img/gb.svg';
+import ru from '../../../img/ru.svg';
+import Option from './Option';
+import { languages } from '../../../utils';
+import { useSelector } from 'react-redux';
+import { toggleLanguage } from '../../../store/modals/modals-actions';
+import Modal from '../Modal';
 
 const GridContainer = styled.div`
   margin-top: 1.5rem;
@@ -24,14 +24,13 @@ const GridContainer = styled.div`
 `;
 
 function Languages() {
-  const { openLanguages } = useSelector((state) => state.modals);
+  const { isLanguageOpen } = useSelector((state) => state.modals);
 
-  if (openLanguages) {
+  if (isLanguageOpen) {
     return (
       <Modal
         toggle={toggleLanguage}
-        titleEng={"Choose language"}
-        titleRus={"Выберите язык"}
+        title={{ english: 'Choose language', russian: 'Выберите язык' }}
       >
         <GridContainer>
           <Option flag={gb} lang={languages.english} />

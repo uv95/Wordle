@@ -12,26 +12,26 @@ import {
   FILTER_KEYS_COLOR,
   CHECK_EXISTENCE,
   SET_WORDS,
-} from "./word-actions";
+} from './word-actions';
 
 const initialState = {
-  lettersNumber: 5,
+  numLetters: 5,
   lettersColors: [],
   guesses: [[], [], [], [], [], []],
-  guessesNumber: 0,
-  guessed: false,
+  numGuesses: 0,
+  isGuessed: false,
   currentWord: [],
   wordExists: true,
   usedWordsList: [],
-  words: {},
-  newGame: true,
+  allWords: {},
+  isNewGame: true,
   keyboard: { green: [], gray: [], yellow: [] },
   extraLettersHelper: [],
   //stats:
-  guessesNumberList: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
-  gamesWon: 0,
-  gamesLost: 0,
-  gamesPlayed: 0,
+  numGuessesList: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
+  numGamesWon: 0,
+  numGamesLost: 0,
+  numGamesPlayed: 0,
 };
 
 export const wordReducer = (state = initialState, { type, payload }) => {
@@ -39,13 +39,13 @@ export const wordReducer = (state = initialState, { type, payload }) => {
     case SET_LETTERS_NUMBER:
       return {
         ...state,
-        lettersNumber: payload,
+        numLetters: payload,
       };
     case ADD_LETTER:
       return {
         ...state,
         guesses: state.guesses.map((guess, i) => {
-          return i === state.guessesNumber && guess.length < state.lettersNumber
+          return i === state.numGuesses && guess.length < state.numLetters
             ? [...guess, payload]
             : guess;
         }),
@@ -54,7 +54,7 @@ export const wordReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         guesses: state.guesses.map((guess, i) => {
-          return i === state.guessesNumber
+          return i === state.numGuesses
             ? guess.slice(0, guess.length - 1)
             : guess;
         }),
@@ -62,13 +62,13 @@ export const wordReducer = (state = initialState, { type, payload }) => {
     case SET_CURRENT_WORD:
       return {
         ...state,
-        currentWord: state.guesses[state.guessesNumber],
+        currentWord: state.guesses[state.numGuesses],
         extraLettersHelper: [],
       };
     case CHECK_EXISTENCE:
       return {
         ...state,
-        wordExists: payload.includes(state.currentWord.join("")),
+        wordExists: payload.includes(state.currentWord.join('')),
       };
     case CLEAR_CURRENT_WORD:
       return {
@@ -84,21 +84,21 @@ export const wordReducer = (state = initialState, { type, payload }) => {
           // eslint-disable-next-line
           state.currentWord.map((letter, i) => {
             const allOccuranciesInCurrentWord = state.currentWord
-              .map((l, i) => (l === letter ? i : ""))
-              .filter((el) => el !== "");
+              .map((l, i) => (l === letter ? i : ''))
+              .filter((el) => el !== '');
             const allOccuranciesInPayload = payload
-              .split("")
-              .map((l, i) => (l === letter ? i : ""))
-              .filter((el) => el !== "");
+              .split('')
+              .map((l, i) => (l === letter ? i : ''))
+              .filter((el) => el !== '');
 
-            if (allOccuranciesInPayload.length === 0) return "gray";
+            if (allOccuranciesInPayload.length === 0) return 'gray';
 
             if (
               allOccuranciesInPayload.length > 0 &&
               allOccuranciesInPayload.length >=
                 allOccuranciesInCurrentWord.length
             )
-              return allOccuranciesInPayload.includes(i) ? "green" : "yellow";
+              return allOccuranciesInPayload.includes(i) ? 'green' : 'yellow';
 
             if (
               allOccuranciesInPayload.length > 0 &&
@@ -139,17 +139,17 @@ export const wordReducer = (state = initialState, { type, payload }) => {
               );
 
               return state.extraLettersHelper.includes(i)
-                ? "gray"
+                ? 'gray'
                 : availableLetters.includes(i) &&
                   allOccuranciesInPayload.includes(i)
-                ? "green"
-                : "yellow";
+                ? 'green'
+                : 'yellow';
             }
           }),
         ],
-        guessed: payload === state.currentWord.join(""),
-        guessesNumber: state.guessesNumber + 1,
-        newGame: false,
+        isGuessed: payload === state.currentWord.join(''),
+        numGuesses: state.numGuesses + 1,
+        isNewGame: false,
       };
     case SET_KEYS_COLOR:
       return {
@@ -160,33 +160,33 @@ export const wordReducer = (state = initialState, { type, payload }) => {
             ...state.currentWord
               .map((l, i) =>
                 state.lettersColors[state.lettersColors.length - 1][i] ===
-                "green"
+                'green'
                   ? l
-                  : ""
+                  : ''
               )
-              .filter((l) => l !== ""),
+              .filter((l) => l !== ''),
           ],
           gray: [
             ...state.keyboard.gray,
             ...state.currentWord
               .map((l, i) =>
                 state.lettersColors[state.lettersColors.length - 1][i] ===
-                "gray"
+                'gray'
                   ? l
-                  : ""
+                  : ''
               )
-              .filter((l) => l !== ""),
+              .filter((l) => l !== ''),
           ],
           yellow: [
             ...state.keyboard.yellow,
             ...state.currentWord
               .map((l, i) =>
                 state.lettersColors[state.lettersColors.length - 1][i] ===
-                "yellow"
+                'yellow'
                   ? l
-                  : ""
+                  : ''
               )
-              .filter((l) => l !== ""),
+              .filter((l) => l !== ''),
           ],
         },
       };
@@ -208,33 +208,34 @@ export const wordReducer = (state = initialState, { type, payload }) => {
     case SET_STATS:
       return {
         ...state,
-        guessesNumberList: state.guessed
+        numGuessesList: state.isGuessed
           ? {
-              ...state.guessesNumberList,
-              [state.guessesNumber]:
-                state.guessesNumberList[state.guessesNumber] + 1,
+              ...state.numGuessesList,
+              [state.numGuesses]: state.numGuessesList[state.numGuesses] + 1,
             }
-          : state.guessesNumberList,
-        gamesPlayed:
-          state.guessed || state.guessesNumber === 6
-            ? state.gamesPlayed + 1
-            : state.gamesPlayed,
-        gamesWon: state.guessed ? state.gamesWon + 1 : state.gamesWon,
-        gamesLost:
-          !state.guessed && state.guessesNumber === 6
-            ? state.gamesLost + 1
-            : state.gamesLost,
+          : state.numGuessesList,
+        numGamesPlayed:
+          state.isGuessed || state.numGuesses === 6
+            ? state.numGamesPlayed + 1
+            : state.numGamesPlayed,
+        numGamesWon: state.isGuessed
+          ? state.numGamesWon + 1
+          : state.numGamesWon,
+        numGamesLost:
+          !state.isGuessed && state.numGuesses === 6
+            ? state.numGamesLost + 1
+            : state.numGamesLost,
       };
     case RESET_GAME:
       return {
         ...state,
         guesses: [[], [], [], [], [], []],
         lettersColors: [],
-        guessesNumber: 0,
+        numGuesses: 0,
         currentWord: [],
-        guessed: false,
+        isGuessed: false,
         wordExists: true,
-        newGame: true,
+        isNewGame: true,
         extraLettersHelper: [],
         keyboard: { gray: [], green: [], yellow: [] },
       };
@@ -246,7 +247,7 @@ export const wordReducer = (state = initialState, { type, payload }) => {
     case SET_WORDS:
       return {
         ...state,
-        words: payload,
+        allWords: payload,
       };
     default:
       return state;

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import CloseIcon from "./CloseIcon";
-import Title from "./Title";
-import ModalContainer from "./ModalContainer";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import CloseIcon from '../style-components/CloseIcon';
+import Title from '../style-components/Title';
+import ModalContainer from '../style-components/ModalContainer';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,39 +16,36 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
-    props.theme === "light"
-      ? "rgba(255, 255, 255, 0.4)"
-      : "rgba(0, 0, 0, 0.4)"};
+    props.theme === 'light'
+      ? 'rgba(255, 255, 255, 0.4)'
+      : 'rgba(0, 0, 0, 0.4)'};
 `;
 
-function Modal({ children, titleEng, titleRus, toggle }) {
+function Modal({ children, title, toggle }) {
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [closed, setClosed] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [isClosed, setIsClosed] = useState(false);
 
   const { language } = useSelector((state) => state.language);
 
   const closeModal = (toggle) => {
-    setClosed(true);
+    setIsClosed(true);
     setTimeout(() => {
       dispatch(toggle(false));
-      setClosed(false);
+      setIsClosed(false);
     }, 200);
   };
 
   useEffect(() => {
-    const setPageTitle = (titleEng, titleRus) => {
-      language === "English" && setTitle(titleEng);
-      language === "Russian" && setTitle(titleRus);
-    };
-    setPageTitle(titleEng, titleRus);
-  }, [language, titleEng, titleRus]);
+    language === 'English' && setModalTitle(title.english);
+    language === 'Russian' && setModalTitle(title.russian);
+  }, [language, title]);
 
   return (
     <Wrapper onClick={() => closeModal(toggle)} theme={theme}>
-      <ModalContainer onClick={(e) => e.stopPropagation()} closed={closed}>
-        <Title>{title}</Title>
+      <ModalContainer onClick={(e) => e.stopPropagation()} isClosed={isClosed}>
+        <Title>{modalTitle}</Title>
         <CloseIcon onClick={() => closeModal(toggle)} />
         {children}
       </ModalContainer>

@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Button from "../../Button";
-import { useSelector, useDispatch } from "react-redux";
-import { setLanguage } from "../../../store/language/language-actions";
-import { resetGame } from "../../../store/word/word-actions";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLanguage } from '../../../store/language/language-actions';
+import { resetGame } from '../../../store/word/word-actions';
+import { Button } from '../../style-components/Button';
 
 const Wrapper = styled(Button)`
   border-radius: 1rem;
   width: 15rem;
   background-color: ${(props) =>
-    props.lang === props.language ? "var(--color-green)" : "var(--color-btn)"};
+    props.lang === props.language ? 'var(--color-green)' : 'var(--color-btn)'};
   transition: background-color 0.2s;
 
   &:hover {
     background-color: ${(props) =>
       props.lang === props.language
-        ? "var(--color-green)"
-        : "var(--color-btn-hover)"};
+        ? 'var(--color-green)'
+        : 'var(--color-btn-hover)'};
   }
   @media (max-width: 26em) {
     font-size: 1.5rem;

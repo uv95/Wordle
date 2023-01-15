@@ -1,23 +1,19 @@
-import React from "react";
-import InfoContentRus from "./InfoContentRus";
-import InfoContentEng from "./InfoContentEng";
-import { useSelector } from "react-redux";
-import { toggleInfo } from "../../../store/modals/modals-actions";
-import Modal from "../Modal";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { toggleInfo } from '../../../store/modals/modals-actions';
+import Modal from '../Modal';
+import InfoContent from './InfoContent';
 
 function Stats() {
-  const { openInfo } = useSelector((state) => state.modals);
-  const { language } = useSelector((state) => state.language);
+  const { isInfoOpen } = useSelector((state) => state.modals);
 
-  if (openInfo) {
+  if (isInfoOpen) {
     return (
       <Modal
         toggle={toggleInfo}
-        titleEng={"How to play"}
-        titleRus={"Правила игры"}
+        title={{ english: 'How to play', russian: 'Правила игры' }}
       >
-        {language === "English" && <InfoContentEng />}
-        {language === "Russian" && <InfoContentRus />}
+        <InfoContent />
       </Modal>
     );
   }
