@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetGame } from '../../store/word/word-actions';
 import StatsContent from './stats/StatsContent';
 import Title from '../style-components/Title';
 import ModalContainer from '../style-components/ModalContainer';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,35 +42,24 @@ const PlayAgainButton = styled.div`
 
 function Finish() {
   const dispatch = useDispatch();
-  const { language } = useSelector((state) => state.language);
   const { isGuessed, usedWordsList } = useSelector((state) => state.word);
-
-  const text = useMemo(() => {
-    if (language === 'English')
-      return ['You won! 🏆', 'You lost 😟', 'Play again', 'Solution:'];
-    if (language === 'Russian')
-      return [
-        'Вы выиграли! 🏆',
-        'Вы проиграли 😟',
-        'Играть снова',
-        'Загаданное слово:',
-      ];
-  }, [language]);
+  const { t } = useTranslation();
 
   return (
     <Wrapper>
       <ModalContainer>
-        <Title>{isGuessed ? text[0] : text[1]}</Title>
+        <Title>{isGuessed ? t('finish.0') : t('finish.1')}</Title>
         <StatsContent />
         <h2>
-          {text[3]} {usedWordsList[usedWordsList.length - 1].toUpperCase()}
+          {t('finish.3')}{' '}
+          {usedWordsList[usedWordsList.length - 1].toUpperCase()}
         </h2>
         <PlayAgainButton onClick={() => dispatch(resetGame())}>
-          {text[2]}
+          {t('finish.2')}
         </PlayAgainButton>
       </ModalContainer>
     </Wrapper>
   );
 }
 
-export default React.memo(Finish);
+export default Finish;

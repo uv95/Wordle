@@ -12,6 +12,7 @@ import {
   setWords,
 } from '../store/word/word-actions';
 import { KeyBtn } from './style-components/Button';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +32,6 @@ const Row = styled.div`
 
 function Keyboard({ word, setWord }) {
   const dispatch = useDispatch();
-  const { language } = useSelector((state) => state.language);
   const {
     guesses,
     numGuesses,
@@ -43,10 +43,12 @@ function Keyboard({ word, setWord }) {
     allWords,
   } = useSelector((state) => state.word);
 
+  const { i18n } = useTranslation();
+
   useEffect(() => {
-    language === 'English' && dispatch(setWords(englishWords));
-    language === 'Russian' && dispatch(setWords(russianWords));
-  }, [language, dispatch]);
+    i18n.language === 'en' && dispatch(setWords(englishWords));
+    i18n.language === 'ru' && dispatch(setWords(russianWords));
+  }, [i18n.language, dispatch]);
 
   useEffect(() => {
     const setNewWord = () => {
@@ -87,7 +89,7 @@ function Keyboard({ word, setWord }) {
   return (
     <Wrapper>
       <Row>
-        {languages[language.toLowerCase()].keyboard.first.map((key) => (
+        {languages[i18n.language].keyboard.first.map((key) => (
           <KeyBtn
             color={setKeyColor(key)}
             onClick={() => dispatch(addLetter(key))}
@@ -98,7 +100,7 @@ function Keyboard({ word, setWord }) {
         ))}
       </Row>
       <Row>
-        {languages[language.toLowerCase()].keyboard.second.map((key) => (
+        {languages[i18n.language].keyboard.second.map((key) => (
           <KeyBtn
             color={setKeyColor(key)}
             onClick={() => dispatch(addLetter(key))}
@@ -110,9 +112,9 @@ function Keyboard({ word, setWord }) {
       </Row>
       <Row>
         <KeyBtn onClick={checkExistence} isEnter>
-          {languages[language.toLowerCase()].keyboard.enter.toUpperCase()}
+          {languages[i18n.language].keyboard.enter.toUpperCase()}
         </KeyBtn>
-        {languages[language.toLowerCase()].keyboard.third.map((key) => (
+        {languages[i18n.language].keyboard.third.map((key) => (
           <KeyBtn
             color={setKeyColor(key)}
             onClick={() => dispatch(addLetter(key))}

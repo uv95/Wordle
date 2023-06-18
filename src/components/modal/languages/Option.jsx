@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { setLanguage } from '../../../store/language/language-actions';
+import { useDispatch } from 'react-redux';
 import { resetGame } from '../../../store/word/word-actions';
 import { Button } from '../../style-components/Button';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled(Button)`
   border-radius: 1rem;
   width: 15rem;
   background-color: ${(props) =>
-    props.lang === props.language ? 'var(--color-green)' : 'var(--color-btn)'};
+    props.i18n === props.language ? 'var(--color-green)' : 'var(--color-btn)'};
   transition: background-color 0.2s;
 
   &:hover {
     background-color: ${(props) =>
-      props.lang === props.language
+      props.i18n === props.language
         ? 'var(--color-green)'
         : 'var(--color-btn-hover)'};
   }
@@ -36,24 +36,24 @@ const ImgContainer = styled.div`
 function Option({ lang, flag }) {
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
-  const { language } = useSelector((state) => state.language);
+  const { t, i18n } = useTranslation();
 
   const changeLang = () => {
-    dispatch(setLanguage(lang.eng));
+    i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru');
     dispatch(resetGame());
   };
 
   return (
     <Wrapper
       hover={hover}
-      lang={lang.eng}
-      language={language}
+      i18n={i18n.language}
+      language={lang.short}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={changeLang}
     >
       <ImgContainer>
-        <img src={flag} alt="country flag" />
+        <img src={flag} alt={t('country-flag')} />
       </ImgContainer>
       {lang.long}
     </Wrapper>

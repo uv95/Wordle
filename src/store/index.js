@@ -18,10 +18,6 @@ store.subscribe(
     () =>
       saveState({
         theme: store.getState().theme,
-        language: {
-          language: store.getState().language.language,
-          languagesOpen: false,
-        },
         word: {
           numLetters: store.getState().word.numLetters,
           guesses: [[], [], [], [], [], []],

@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { LetterBoxColoredSmall } from '../../style-components/LetterBox';
 import Text from '../../style-components/Text';
@@ -44,55 +43,40 @@ const Background = styled.div`
 `;
 
 function ColorsExplanation() {
-  const { language } = useSelector((state) => state.language);
-
-  const text = useMemo(() => {
-    if (language === 'English')
-      return [
-        'T',
-        'B',
-        "aren't in the target word at all.",
-        'A',
-        'L',
-        'are in the word but in the wrong spot.',
-        'E',
-        'is in the word and in the correct spot.',
-      ];
-    if (language === 'Russian')
-      return [
-        'П',
-        'С',
-        'не содержатся в загаданном слове.',
-        'А',
-        'Т',
-        'содержатся в слове, но не на своем месте.',
-        'А',
-        'есть в слове и на своем месте.',
-      ];
-  }, [language]);
+  const { t } = useTranslation();
 
   return (
     <Background>
       <FlexContainer>
-        <LetterBoxColoredSmall color="gray">{text[0]}</LetterBoxColoredSmall>
+        <LetterBoxColoredSmall color="gray">
+          {t('colors-explanation.0')}
+        </LetterBoxColoredSmall>
         <ExplanationText>,</ExplanationText>
-        <LetterBoxColoredSmall color="gray">{text[1]}</LetterBoxColoredSmall>
-        <ExplanationText>{text[2]}</ExplanationText>
+        <LetterBoxColoredSmall color="gray">
+          {t('colors-explanation.1')}
+        </LetterBoxColoredSmall>
+        <ExplanationText>{t('colors-explanation.2')}</ExplanationText>
       </FlexContainer>
 
       <FlexContainer>
-        <LetterBoxColoredSmall color="yellow">{text[3]}</LetterBoxColoredSmall>
+        <LetterBoxColoredSmall color="yellow">
+          {t('colors-explanation.3')}
+        </LetterBoxColoredSmall>
         <ExplanationText>,</ExplanationText>
-        <LetterBoxColoredSmall color="yellow">{text[4]}</LetterBoxColoredSmall>
-        <ExplanationText>{text[5]}</ExplanationText>
+        <LetterBoxColoredSmall color="yellow">
+          {t('colors-explanation.4')}
+        </LetterBoxColoredSmall>
+        <ExplanationText>{t('colors-explanation.5')}</ExplanationText>
       </FlexContainer>
 
       <FlexContainer>
-        <LetterBoxColoredSmall color="green">{text[6]}</LetterBoxColoredSmall>
-        <ExplanationText>{text[7]}</ExplanationText>
+        <LetterBoxColoredSmall color="green">
+          {t('colors-explanation.6')}
+        </LetterBoxColoredSmall>
+        <ExplanationText>{t('colors-explanation.7')}</ExplanationText>
       </FlexContainer>
     </Background>
   );
 }
 
-export default React.memo(ColorsExplanation);
+export default ColorsExplanation;

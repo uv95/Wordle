@@ -1,6 +1,7 @@
-import Header from "./components/Header";
-import Container from "./components/Container";
-import styled from "styled-components";
+import Header from './components/Header';
+import Container from './components/Container';
+import styled from 'styled-components';
+import { Suspense } from 'react';
 
 const Main = styled.main`
   margin: 0 auto;
@@ -10,8 +11,10 @@ const Main = styled.main`
 function App() {
   return (
     <Main>
-      <Header />
-      <Container />
+      <Suspense fallback="">
+        <Header />
+        <Container />
+      </Suspense>
     </Main>
   );
 }

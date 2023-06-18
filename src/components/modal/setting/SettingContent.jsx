@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Toggle from '../../style-components/Toggle';
 import Numbers from './Numbers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme } from '../../../store/theme/theme-actions';
+import { useTranslation } from 'react-i18next';
 
 const Section = styled.div`
   min-height: 5rem;
@@ -45,26 +46,20 @@ const SectionTitle = styled.h3`
 
 function SettingContent() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const theme = useSelector((state) => state.theme);
-  const [text, setText] = useState([]);
-  const { language } = useSelector((state) => state.language);
 
   const toggleTheme = () =>
     dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
 
-  useEffect(() => {
-    language === 'English' && setText(['Number of letters', 'Dark theme']);
-    language === 'Russian' && setText(['Количество букв', 'Темная тема']);
-  }, [language]);
-
   return (
     <>
       <Section>
-        <SectionTitle>{text[0]}</SectionTitle>
+        <SectionTitle>{t('settings-content.0')}</SectionTitle>
         <Numbers />
       </Section>
       <Section>
-        <SectionTitle>{text[1]}</SectionTitle>
+        <SectionTitle>{t('settings-content.1')}</SectionTitle>
         <Toggle theme={theme} onClick={toggleTheme} />
       </Section>
     </>

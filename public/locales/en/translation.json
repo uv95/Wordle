@@ -1,0 +1,29 @@
+{
+  "lang": "English",
+  "choose-lang": "Choose language",
+  "settings": "Settings",
+  "stats": "Statistics",
+  "rules": "How to play",
+  "colors-explanation": [
+    "T",
+    "B",
+    "aren't in the target word at all.",
+    "A",
+    "L",
+    "are in the word but in the wrong spot.",
+    "E",
+    "is in the word and in the correct spot."
+  ],
+  "info-content": [
+    "You have to guess the hidden word in 6 tries and the color of the letters changes to show how close you are.",
+    "To start the game, just enter any word, for example:",
+    "Another try to find matching letters in the target word.",
+    "So close!",
+    "Got it!"
+  ],
+  "settings-content": ["Number of letters", "Dark theme"],
+  "stats-content": ["games played", "games won", "best try", "% of wins"],
+  "guess-distribution": "Guess distribution",
+  "finish": ["You won! 🏆", "You lost 😟", "Play again", "Solution:"],
+  "no-word": "No such word"
+}

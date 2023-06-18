@@ -3,6 +3,7 @@ import Title from '../../style-components/Title';
 import styled from 'styled-components';
 import Text from '../../style-components/Text';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const Line = styled.div`
   display: flex;
@@ -33,24 +34,18 @@ const Bar = styled.div`
 `;
 
 function ProgressBars() {
-  const [title, setTitle] = useState('');
   const [maxRepeatedValue, setMaxRepeatedValue] = useState(0);
   const { numGuessesList } = useSelector((state) => state.word);
   const guessesDistribution = [1, 2, 3, 4, 5, 6];
-  const { language } = useSelector((state) => state.language);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMaxRepeatedValue(Math.max(...Object.values(numGuessesList)));
   }, [numGuessesList]);
 
-  useEffect(() => {
-    language === 'English' && setTitle('Guess distribution');
-    language === 'Russian' && setTitle('Попытки');
-  }, [language]);
-
   return (
     <>
-      <Title>{title}</Title>
+      <Title>{t('guess-distribution')}</Title>
       {guessesDistribution.map((guess) => (
         <Line key={guess}>
           <Text>{guess}</Text>{' '}

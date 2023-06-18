@@ -1,27 +1,27 @@
-const engWords = require("an-array-of-english-words");
-const rusWords = require("russian-words");
+const engWords = require('an-array-of-english-words');
+const rusWords = require('russian-words');
 
 export const languages = {
-  english: {
-    long: "English",
-    eng: "English",
-    short: "EN",
+  en: {
+    long: 'English',
+    eng: 'English',
+    short: 'en',
     keyboard: {
-      first: ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-      second: ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-      third: ["z", "x", "c", "v", "b", "n", "m"],
-      enter: "enter",
+      first: ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+      second: ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+      third: ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+      enter: 'enter',
     },
   },
-  russian: {
-    long: "Русский",
-    eng: "Russian",
-    short: "RU",
+  ru: {
+    long: 'Русский',
+    eng: 'Russian',
+    short: 'ru',
     keyboard: {
-      first: ["й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ"],
-      second: ["ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э"],
-      third: ["я", "ч", "с", "м", "и", "т", "ь", "б", "ю"],
-      enter: "ввод",
+      first: ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
+      second: ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'],
+      third: ['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю'],
+      enter: 'ввод',
     },
   },
 };

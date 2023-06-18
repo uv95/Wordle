@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import Text from '../../style-components/Text';
 import ProgressBars from './ProgressBars';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const GridContainer = styled.div`
   display: grid;
@@ -26,29 +26,22 @@ const Number = styled.h3`
 `;
 
 function StatsContent() {
-  const { language } = useSelector((state) => state.language);
   const { numGuessesList, numGamesWon, numGamesPlayed } = useSelector(
     (state) => state.word
   );
-
-  const text = useMemo(() => {
-    if (language === 'English')
-      return ['games played', 'games won', 'best try', '% of wins'];
-    if (language === 'Russian')
-      return ['игр сыграно', 'игр выиграно', 'лучшая попытка', '% побед'];
-  }, [language]);
+  const { t } = useTranslation();
 
   return (
     <>
       <GridContainer>
         <StatsBox>
           <Number>{numGamesPlayed}</Number>
-          <Text>{text[0]}</Text>
+          <Text>{t('stats-content.0')}</Text>
         </StatsBox>
 
         <StatsBox>
           <Number>{numGamesWon}</Number>
-          <Text>{text[1]}</Text>
+          <Text>{t('stats-content.1')}</Text>
         </StatsBox>
 
         <StatsBox>
@@ -61,14 +54,14 @@ function StatsContent() {
                 )
               : 0}
           </Number>
-          <Text>{text[2]}</Text>
+          <Text>{t('stats-content.2')}</Text>
         </StatsBox>
 
         <StatsBox>
           <Number>
             {Math.trunc((numGamesWon / numGamesPlayed) * 100) || 0}%
           </Number>
-          <Text>{text[3]}</Text>
+          <Text>{t('stats-content.3')}</Text>
         </StatsBox>
       </GridContainer>
 
@@ -77,4 +70,4 @@ function StatsContent() {
   );
 }
 
-export default React.memo(StatsContent);
+export default StatsContent;

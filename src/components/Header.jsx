@@ -15,6 +15,7 @@ import gb from '../img/gb.svg';
 import ru from '../img/ru.svg';
 import { languages } from '../utils';
 import { Button } from './style-components/Button';
+import { useTranslation } from 'react-i18next';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -47,8 +48,8 @@ const ImgContainer = styled.div`
 
 function Header() {
   const dispatch = useDispatch();
-  const { language } = useSelector((state) => state.language);
   const theme = useSelector((state) => state.theme);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
@@ -59,9 +60,9 @@ function Header() {
       <HeaderContainer>
         <Button onClick={() => dispatch(toggleLanguage(true))}>
           <ImgContainer>
-            <img src={language === 'English' ? gb : ru} alt="country flag" />
+            <img src={i18n.language === 'ru' ? ru : gb} alt="country flag" />
           </ImgContainer>
-          {languages[language.toLowerCase()].short}
+          {t('lang')}
         </Button>
         <Languages />
         <FlexContainer>

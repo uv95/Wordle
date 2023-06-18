@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import CloseIcon from '../style-components/CloseIcon';
 import Title from '../style-components/Title';
 import ModalContainer from '../style-components/ModalContainer';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,10 +25,7 @@ const Wrapper = styled.div`
 function Modal({ children, title, toggle }) {
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
-  const [modalTitle, setModalTitle] = useState('');
   const [isClosed, setIsClosed] = useState(false);
-
-  const { language } = useSelector((state) => state.language);
 
   const closeModal = (toggle) => {
     setIsClosed(true);
@@ -37,15 +35,10 @@ function Modal({ children, title, toggle }) {
     }, 200);
   };
 
-  useEffect(() => {
-    language === 'English' && setModalTitle(title.english);
-    language === 'Russian' && setModalTitle(title.russian);
-  }, [language, title]);
-
   return (
     <Wrapper onClick={() => closeModal(toggle)} theme={theme}>
       <ModalContainer onClick={(e) => e.stopPropagation()} isClosed={isClosed}>
-        <Title>{modalTitle}</Title>
+        <Title>{title}</Title>
         <CloseIcon onClick={() => closeModal(toggle)} />
         {children}
       </ModalContainer>

@@ -1,0 +1,11 @@
+{
+  "i18n-ally.localesPaths": [
+    "src/i18n",
+    "public/locales",
+    "src/components/modal/languages"
+  ],
+  "i18n-ally.extract.ignoredByFiles": {
+    "src/components/modal/languages/Option.jsx": ["country flag"]
+  },
+  "i18n-ally.keystyle": "flat"
+}
