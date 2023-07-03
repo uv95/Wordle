@@ -13,7 +13,6 @@ import {
 import Languages from './modal/languages/Languages';
 import gb from '../img/gb.svg';
 import ru from '../img/ru.svg';
-import { languages } from '../utils';
 import { Button } from './style-components/Button';
 import { useTranslation } from 'react-i18next';
 

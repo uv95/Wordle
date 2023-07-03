@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import CloseIcon from '../style-components/CloseIcon';
 import Title from '../style-components/Title';
 import ModalContainer from '../style-components/ModalContainer';
-import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
   display: flex;
