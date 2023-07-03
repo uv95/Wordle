@@ -10,7 +10,8 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'ru',
-    debug: true,
+    debug: process.env.MODE === 'development',
+    load: 'languageOnly',
 
     interpolation: {
       escapeValue: process.env.MODE === 'development',

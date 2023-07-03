@@ -44,11 +44,11 @@ function Keyboard({ word, setWord }) {
   } = useSelector((state) => state.word);
 
   const { i18n } = useTranslation();
-
+  const i18nLanguage = i18n.language.slice(0,2)
   useEffect(() => {
-    i18n.language === 'en' && dispatch(setWords(englishWords));
-    i18n.language === 'ru' && dispatch(setWords(russianWords));
-  }, [i18n.language, dispatch]);
+    i18nLanguage === 'en' && dispatch(setWords(englishWords));
+    i18nLanguage === 'ru' && dispatch(setWords(russianWords));
+  }, [i18nLanguage, dispatch]);
 
   useEffect(() => {
     const setNewWord = () => {
@@ -89,7 +89,7 @@ function Keyboard({ word, setWord }) {
   return (
     <Wrapper>
       <Row>
-        {languages[i18n.language].keyboard.first.map((key) => (
+        {languages[i18nLanguage].keyboard.first.map((key) => (
           <KeyBtn
             color={setKeyColor(key)}
             onClick={() => dispatch(addLetter(key))}
@@ -100,7 +100,7 @@ function Keyboard({ word, setWord }) {
         ))}
       </Row>
       <Row>
-        {languages[i18n.language].keyboard.second.map((key) => (
+        {languages[i18nLanguage].keyboard.second.map((key) => (
           <KeyBtn
             color={setKeyColor(key)}
             onClick={() => dispatch(addLetter(key))}
@@ -112,9 +112,9 @@ function Keyboard({ word, setWord }) {
       </Row>
       <Row>
         <KeyBtn onClick={checkExistence} isEnter>
-          {languages[i18n.language].keyboard.enter.toUpperCase()}
+          {languages[i18nLanguage].keyboard.enter.toUpperCase()}
         </KeyBtn>
-        {languages[i18n.language].keyboard.third.map((key) => (
+        {languages[i18nLanguage].keyboard.third.map((key) => (
           <KeyBtn
             color={setKeyColor(key)}
             onClick={() => dispatch(addLetter(key))}
