@@ -26,19 +26,25 @@ export const languages = {
   },
 };
 
+const getWordsWithoutHyphen = (words) => words.filter(word=>!word.split('').includes('-'))
+
+const getWordsOfLength = (words,length)=> words.filter(word=>word.length===length)
+
+const filterWords = (words,length)=> getWordsWithoutHyphen(getWordsOfLength(words, length));
+
 export const englishWords = {
-  5: engWords.filter((w) => w.length === 5),
-  6: engWords.filter((w) => w.length === 6),
-  7: engWords.filter((w) => w.length === 7),
-  8: engWords.filter((w) => w.length === 8),
-  9: engWords.filter((w) => w.length === 9),
-  10: engWords.filter((w) => w.length === 10),
+  5: filterWords(engWords, 5),
+  6: filterWords(engWords, 6),
+  7: filterWords(engWords, 7),
+  8: filterWords(engWords, 8),
+  9: filterWords(engWords, 9),
+  10: filterWords(engWords, 10),
 };
 export const russianWords = {
-  5: rusWords.filter((w) => w.length === 5),
-  6: rusWords.filter((w) => w.length === 6),
-  7: rusWords.filter((w) => w.length === 7),
-  8: rusWords.filter((w) => w.length === 8),
-  9: rusWords.filter((w) => w.length === 9),
-  10: rusWords.filter((w) => w.length === 10),
+  5: filterWords(rusWords, 5),
+  6: filterWords(rusWords, 6),
+  7: filterWords(rusWords, 7),
+  8: filterWords(rusWords, 8),
+  9: filterWords(rusWords, 9),
+  10: filterWords(rusWords, 10),
 };

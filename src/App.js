@@ -9,6 +9,7 @@ const Main = styled.main`
 `;
 
 function App() {
+  console.log(['ga-ga', 'words', 'maps', 'ru-ru'].filter(word=>!word.split('').includes('-')))
   return (
     <Main>
       <Suspense fallback="">
